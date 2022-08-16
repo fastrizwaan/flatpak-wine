@@ -4,9 +4,8 @@ Official stable Wine 5.0.5 and 7.0 in flatpaks for all flatpak supported distrib
 
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
-### !! Now using WineZGUI with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge-6.29 !!
+### !! Now using [WineZGUI](https://github.com/fastrizwaan/WineZGUI) with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge-6.29 !!
 
-Though `org.winehq.Wine` can be installed by `flatpak --user install flathub org.winehq.Wine` and is available at [flathub](https://flathub.org/apps) which is currently at 7.0 which can be used with [GitHub - fastrizwaan/WineZGUI: Wine GUI using Zenity](https://github.com/fastrizwaan/WineZGUI)
 
 ### For the impatient
 
@@ -17,7 +16,7 @@ In a terminal window, copy paste these:
 flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-21.08
 
-# Download flatpak-wine 5.0.5 and 7.0 can be installed together
+# Download flatpak-wine 5.0.5 and flatpak-wine 7.0 and flatpak-proton can be installed together
 
 wget -c https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/flatpak-wine5_0.83.1_20220816/flatpak-wine5_0.83.1_20220816.flatpak
 wget -c https://github.com/fastrizwaan/flatpak-wine-releases/releases/download/flatpak-wine7_0.83.1_20220816/flatpak-wine7_0.83.1_20220816.flatpak
@@ -134,7 +133,6 @@ bash ./install.sh
 this will create a flatpak and also install it (as --user)
 
  
-
 ### Videos
 
 https://youtu.be/x4PUObpG8sI                (flatpak-wine version 1.0 install instructions) old version
