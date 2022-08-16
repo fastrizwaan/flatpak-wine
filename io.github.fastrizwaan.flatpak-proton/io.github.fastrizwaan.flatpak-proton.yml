@@ -243,10 +243,10 @@ modules:
     buildsystem: simple
     build-commands:
     # 1. Build wine64
-    - tar -zxvf proton-ge-6.29.tar.gz -C /app
+    - tar -zxvf proton-ge-7.29.tar.gz -C /app
     sources:
       - type: file
-        path : proton-ge-6.29.tar.gz
+        path : proton-ge-7.29.tar.gz
 
 
 

@@ -16,7 +16,7 @@ SHORT_APP_ID="flatpak-proton-ge"
 DATE=$(date +'%Y%m%d')
 
 WINEZGUI_VERSION="0.83.1"
-FLATPAK_PROTON_VERSION="6.29"
+FLATPAK_PROTON_VERSION="7.29"
 BRANCH=21.08
 
 # handle relative path for building
