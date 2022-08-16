@@ -1,0 +1,444 @@
+app-id: io.github.fastrizwaan.flatpak-wine5
+base-version: '21.08'
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: winezgui
+branch: '21.08'
+separate-locales: false
+
+command: winezgui
+rename-icon: winezgui
+rename-desktop-file: winezgui.desktop
+
+# Support 32-bit at runtime
+add-extensions:
+  org.freedesktop.Platform.Compat.i386:
+    directory: lib/i386-linux-gnu
+    version: '21.08'
+
+  org.gnome.Platform.Compat.i386.Debug:
+    directory: lib/debug/lib/i386-linux-gnu
+    version: '21.08'
+    no-autodownload: true
+
+  org.freedesktop.Platform.GL32:
+    directory: lib/i386-linux-gnu/GL
+    versions: "21.08;1.4"
+    version: '1.4'
+    subdirectories: true
+    no-autodownload: true
+    autodelete: false
+    add-ld-path: lib
+    merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
+    download-if: active-gl-driver
+    enable-if: active-gl-driver
+    
+  org.freedesktop.Platform.VAAPI.Intel:
+      directory: lib/dri/intel-vaapi-driver
+      autodelete: false
+      no-autodownload: true
+      download-if: active-gl-driver
+      enable-if: active-gl-driver
+      version: '21.08'
+  
+  org.freedesktop.Platform.VAAPI.Intel.i386:
+      directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
+      no-autodownload: true
+      subdirectories: true
+      add-ld-path: lib
+      download-if: active-gl-driver
+      enable-if: active-gl-driver
+      version: '21.08'
+  
+  org.freedesktop.Platform.ffmpeg-full:
+      directory: lib/ffmpeg
+      add-ld-path: .
+      version: '21.08'
+      autodelete: false
+
+  org.freedesktop.Platform.ffmpeg_full.i386:
+      directory: lib32/ffmpeg
+      add-ld-path: .
+      version: '21.08'
+      autodelete: false
+      
+# Support 32-bit at buildtime
+sdk-extensions:
+  - org.freedesktop.Sdk.Compat.i386
+  - org.freedesktop.Sdk.Extension.toolchain-i386
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --socket=pulseaudio
+  - --allow=multiarch
+  - --allow=devel
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.gnome.Mutter.DisplayConfig
+  - --talk-name=org.freedesktop.Flatpak
+  - --filesystem=host
+#  - --filesystem=~/.local/share/flatpak-wine50/:create
+  - --device=all
+  # wineprefixes are created here
+#  - --persist=~/.local/share/flatpak-wine50/
+  # Support 32-bit runtime
+  # Testing for Driver San andreas- --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine
+
+modules:
+
+  # Create 32-bit directories
+  - name: compat
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/i386-linux-gnu 
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/dri/intel-vaapi-driver
+      - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
+      - mkdir -p /app/lib/udev/rules.d
+      - mkdir -p /app/extensions/Plugins
+      - mkdir -p /app/lib64
+      - mkdir -p /app/lib32
+      - mkdir -p /app/lib/ffmpeg
+      - mkdir -p /app/lib32/ffmpeg
+      
+# libusb
+  - name: libusb-64bit
+    strip: true
+    no-debuginfo: true  
+    config-opts: 
+      - --disable-static
+      - --enable-shared     
+    sources:
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
+        sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+
+
+  - name: libusb-32bit
+    strip: true
+    no-debuginfo: true  
+    config-opts: 
+      - --disable-static
+      - --enable-shared     
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC:  i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+    sources:
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
+        sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
+
+
+# vkd3d
+  - name: vkd3d-64bit
+    build-options:
+
+      strip: true
+      no-debuginfo: true  
+    config-opts: 
+      - --disable-static
+      - --enable-shared     
+    sources: 
+      - type: archive
+        url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.4.tar.xz"
+        sha256: c8ba85f60482c873c056cf6dbb0eaf791bc8ab7d16d62a47f37b9841b6a90abd
+    modules:
+      - name: SPIRV-Headers
+        buildsystem: cmake-ninja
+        sources:
+          - type: archive
+            url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/1.5.4.raytracing.fixed.tar.gz
+            sha256: df2ad2520be4d95a479fa248921065885bbf435a658349a7fc164ad7b26b68c6
+# 32 bit
+  - name: vkd3d-32bit
+    config-opts: 
+      - --disable-static
+      - --enable-shared  
+
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC:  i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+    sources: 
+      - type: archive
+        url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.4.tar.xz"
+        sha256: c8ba85f60482c873c056cf6dbb0eaf791bc8ab7d16d62a47f37b9841b6a90abd
+    modules:
+
+      - name: SPIRV-Headers-32bit
+        buildsystem: cmake-ninja
+        build-options:
+          prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+          ldflags: -L/app/lib32
+          prepend-path: /usr/lib/sdk/toolchain-i386/bin
+          env:
+            CC:  i686-unknown-linux-gnu-gcc
+            CXX: i686-unknown-linux-gnu-g++
+          libdir: /app/lib32
+          strip: true
+          no-debuginfo: true        
+        sources:
+          - type: archive
+            url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/1.5.4.raytracing.fixed.tar.gz
+            sha256: df2ad2520be4d95a479fa248921065885bbf435a658349a7fc164ad7b26b68c6
+
+  - name: faudio-32bit
+    buildsystem: cmake-ninja
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC:  i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+
+    config-opts:
+      - -DGSTREAMER=ON
+    sources:
+      - type: archive
+        url: https://github.com/FNA-XNA/FAudio/archive/22.06/FAudio-22.06.tar.gz 
+        sha256: 6cc2480a191ecfd6a2b6c57af3c21307ffb8a4d4af95769386590e9a33ea1750
+        
+# faudio 64
+  - name: faudio-64bit
+    buildsystem: cmake-ninja
+    build-options:
+      strip: true
+      no-debuginfo: true  
+    config-opts:
+      - -DGSTREAMER=ON
+    sources:
+      - type: archive
+        url: https://github.com/FNA-XNA/FAudio/archive/22.06/FAudio-22.06.tar.gz 
+        sha256: 6cc2480a191ecfd6a2b6c57af3c21307ffb8a4d4af95769386590e9a33ea1750
+        
+
+
+                
+# build wow64              
+  - name: wine-wow-5.0.5
+    builddir: true
+    build-options:
+      make-args: -j $FLATPAK_BUILDER_N_JOBS
+      prefix: /app
+      prepend-path: /app/bin
+      ldflags: -L/app/lib64 -L/app/lib -L/app/lib32
+      append-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC:  i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+      
+    make-install-args:
+      - LDCONFIG=/bin/true
+      - STRIP=/bin/true
+      - UPDATE_DESKTOP_DATABASE=/bin/true
+    buildsystem: simple
+    build-commands:
+    # 1. Build wine64
+    - export CC=x86_64-unknown-linux-gnu-gcc  &&
+      export CXX=x86_64-unknown-linux-gnu-g++ &&
+      mkdir wine64-build && cd wine64-build   &&
+      ../configure 
+      --prefix="/app" 
+      --enable-shared      
+      --disable-static
+      --disable-win16
+      --disable-tests
+      --with-x
+      --without-curses
+      --without-capi
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-netapi
+      --enable-win64 &&  
+      make -j $FLATPAK_BUILDER_N_JOBS
+
+    # 2. Build wine32 twice
+    - export CC=i686-unknown-linux-gnu-gcc  &&
+      export CXX=i686-unknown-linux-gnu-g++ &&
+      mkdir wine32-tools && cd wine32-tools &&
+      ../configure 
+      --prefix="/app" 
+      --enable-shared
+      --disable-static
+      --disable-win16
+      --disable-tests
+      --with-x
+      --without-curses
+      --without-capi
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-netapi &&
+      make -j $FLATPAK_BUILDER_N_JOBS
+
+    # 3. Build 32bit second time and 
+    # install 32 bit and 64 bit wine
+    - export CC=i686-unknown-linux-gnu-gcc  &&
+      export CXX=i686-unknown-linux-gnu-g++ &&
+      mkdir wine32-combo && cd wine32-combo &&
+      ../configure 
+      --with-wine64=../wine64-build
+      --with-wine-tools=../wine32-tools
+      --prefix="/app" 
+      --enable-shared      
+      --disable-static
+      --disable-win16
+      --disable-tests
+      --with-x
+      --without-curses
+      --without-capi
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-netapi   &&
+      make -j $FLATPAK_BUILDER_N_JOBS           && 
+      make install       && 
+      cd ../wine64-build && 
+      make install
+
+    sources:
+      - type: archive
+        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz
+        sha512: 3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36
+        
+  - name: winetricks
+    buildsystem: simple
+    build-commands:
+    - make
+    - make PREFIX=/app install
+    - chmod +x /app/bin/winetricks
+    sources:
+    - type: git
+      url: https://github.com/Winetricks/winetricks.git
+      commit: db1fd08852865d34eeb06f8c3213a43bb2aa7a1a
+      
+  - name: cabextract
+    buildsystem: autotools
+    sources:
+    - type: archive
+      url: https://www.cabextract.org.uk/cabextract-1.6.tar.gz
+      sha256: cee661b56555350d26943c5e127fc75dd290b7f75689d5ebc1f04957c4af55fb
+  
+  - name: wget
+    buildsystem: autotools
+    strip: true
+    no-debuginfo: true
+      
+    sources:
+    - type: archive
+      url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
+      sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
+
+  - name: icoutils
+    build-options:
+      #strip: true
+      no-debuginfo: true  
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: http://savannah.nongnu.org/download/icoutils/icoutils-0.32.3.tar.bz2
+        mirror-urls: 
+          - https://download-mirror.savannah.gnu.org/releases/icoutils/icoutils-0.32.3.tar.bz2
+          - https://ftp.up.pt/pub/nongnu/icoutils/icoutils-0.32.3.tar.bz2
+        sha256: 17abe02d043a253b68b47e3af69c9fc755b895db68fdc8811786125df564c6e0
+
+  - name: perl
+    no-autogen: true
+    config-opts:
+    - "-des"
+    - "-Duseshrplib"
+    build-options:
+      cflags: "-fPIC"
+      ldflags: "-fpic"
+    sources:
+    - type: archive
+      url: https://www.cpan.org/src/5.0/perl-5.32.0.tar.gz
+      sha256: efeb1ce1f10824190ad1cadbcccf6fdb8a5d37007d0100d2d9ae5f2b5900c0b4
+    - type: script
+      dest-filename: configure
+      commands:
+      - exec ./configure.gnu $@
+    post-install:
+    - chmod -R u+w /app/lib/perl5
+  
+  - name: exiftool
+    buildsystem: simple
+    build-commands:
+      - perl Makefile.PL
+      - make
+      - make install 
+    sources:
+      - type: archive
+        url: https://exiftool.org/Image-ExifTool-12.41.tar.gz
+        sha256: 654f401daab0045a8364fa59d3f69b6f9bf23bcef157a3c928e373884a6f9370
+        
+  - name: desktop-file-utils
+    build-options:
+      #strip: true
+      no-debuginfo: true  
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://www.freedesktop.org/software/desktop-file-utils/releases/desktop-file-utils-0.26.tar.xz
+        sha256: b26dbde79ea72c8c84fb7f9d870ffd857381d049a86d25e0038c4cef4c747309
+
+  - name: include_manifest_and_install_scripts
+    buildsystem: simple
+    build-commands:
+    - mkdir /app/flatpak_manifest_and_build_script
+    - install -Dm644 $FLATPAK_ID.yml /app/flatpak_manifest_and_build_script
+    - install -Dm644 install.sh /app/flatpak_manifest_and_build_script
+    sources:
+    - type: file
+      path: install.sh
+    - type: file
+      path: io.github.fastrizwaan.flatpak-wine5.yml
+    - type: file
+      path: sha256sums.txt
+
+  - name: WineZGUI
+    buildsystem: simple
+    build-commands:
+      - ./setup --install --flatpak --prefix=/app --flatpak-id=$FLATPAK_ID
+      - desktop-file-edit --set-name="WineZGUI (flatpak-wine5)" 
+        /app/share/applications/winezgui.desktop
+    sources:
+      - type: git
+        branch: 0.83.1
+        url: https://github.com/fastrizwaan/WineZGUI.git
+
+cleanup:
+ - "*.a"
+ - /lib/debug
+ - /lib32/debug
+ - /lib64/debug
+ - /share/man
+ - /include 
+ - /share/applications/winetricks.desktop
+ - /app/share/applications/winetricks.desktop
+ - /app/explorer++/"*.txt"
+ 
