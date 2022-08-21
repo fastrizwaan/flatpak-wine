@@ -428,7 +428,7 @@ modules:
         /app/share/applications/winezgui.desktop
     sources:
       - type: git
-        branch: 0.83.1
+        branch: 0.84
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
