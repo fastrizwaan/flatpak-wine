@@ -89,7 +89,7 @@ if [ "$1" = "bundle" ]; then
      echo "Sucessfully built ${BUNDLE}!"
 
      echo "Generating sha256sum of ${APP_ID}"
-     sha256sum ${BUNDLE} |tee SHA256SUM
+     sha256sum ${BUNDLE} |tee "sha256sum.${BUNDLE}"
      
      MSG=()
      MSG+="Install command:\n"
