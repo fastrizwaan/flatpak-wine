@@ -13,7 +13,7 @@ Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan
 
 [flatpak-proton-ge-7.29 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.84/flatpak-proton-ge-7.29_0.84_20220822.flatpak) [for proton compatible games]
 
-[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.84/flatpak-winezgui_0.84_20220822.flatpak)
+[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.84/flatpak-winezgui_0.84_20220822.flatpak) [stable wine from flathub]
 
 ### For the impatient
 
