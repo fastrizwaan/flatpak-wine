@@ -11,8 +11,8 @@ if ! command -v flatpak-builder &>/dev/null; then
      exit 1
 fi
 
-APP_ID="io.github.fastrizwaan.flatpak-wine7"
-SHORT_APP_ID="flatpak-wine7"
+APP_ID="io.github.fastrizwaan.WineZGUI"
+SHORT_APP_ID="flatpak-winezgui"
 DATE=$(date +'%Y%m%d')
 
 WINEZGUI_VERSION=0.84
@@ -27,7 +27,7 @@ echo SCRIPT_DIR=$(dirname ${SCRIPT_NAME})
 
 
 # Where to build the flatpak?
-export FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR/flatpak-wine7
+export FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR/flatpak-winezgui
 
 mkdir -p ${FLATPAK_BUILD_DIR}
 

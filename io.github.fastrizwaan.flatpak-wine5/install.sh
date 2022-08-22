@@ -60,20 +60,24 @@ flatpak --user -y install flathub runtime/org.freedesktop.Sdk.Compat.i386/x86_64
 flatpak --user -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/21.08
 #------------------------user----------------------------------------------'
 
+flatpak-builder --force-clean build-dir ${APP_ID}.yml || (echo "Build failed" ; exit 1)
+
 # Prefer system install
 if [ "$1" = "user" ]; then
      echo "Installing ${APP_ID}..."
      flatpak-builder --user --install --force-clean build-dir ${APP_ID}.yml && \
-     echo -e "\n\nSuccessfully installed ${APP_ID} flatpak as user ${USER}!"
-     echo -e "run:\nflatpak run ${APP_ID}" 
+     (echo -e "\n\nSuccessfully installed ${APP_ID} flatpak as user ${USER}!";
+   	  echo -e "run:\nflatpak run ${APP_ID}") || (echo "Install failed" ; exit 1)
+
+
 else
      echo "Installing ${APP_ID}... systemwide"
      sudo flatpak-builder --system --install --force-clean build-dir-root ${APP_ID}.yml && \
-     echo -e "\n\nSuccessfully installed ${APP_ID} flatpak in the system!"
-     echo -e "run:\nflatpak run ${APP_ID}" 
+     (echo -e "\n\nSuccessfully installed ${APP_ID} flatpak system-wide!";
+   	  echo -e "run:\nflatpak run ${APP_ID}") || (echo "Install failed" ; exit 1)
+
+
 fi
-
-
 # Create flatpak bundle?
 if [ "$1" = "bundle" ]; then
      MSG=("Please wait building bundle...")
@@ -86,10 +90,11 @@ if [ "$1" = "bundle" ]; then
      # Create flatpak bundle
 
      flatpak build-bundle ${REPO} ${BUNDLE} ${APP_ID} ${BRANCH} && \
-     echo "Sucessfully built ${BUNDLE}!"
+     echo "Sucessfully built ${BUNDLE}!" || (echo "build bundle failed" && exit 1)
 
      echo "Generating sha256sum of ${APP_ID}"
-     sha256sum ${BUNDLE} |tee "sha256sum.${BUNDLE}"
+     SHORT_BUNDLE_ID="$(echo ${BUNDLE}|sed 's/\.flatpak//g')"
+     sha256sum ${BUNDLE} |tee "sha256sum.${SHORT_BUNDLE_ID}"
      
      MSG=()
      MSG+="Install command:\n"
