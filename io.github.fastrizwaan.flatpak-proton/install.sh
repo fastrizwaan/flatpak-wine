@@ -15,7 +15,7 @@ APP_ID="io.github.fastrizwaan.flatpak-proton"
 SHORT_APP_ID="flatpak-proton-ge"
 DATE=$(date +'%Y%m%d')
 
-WINEZGUI_VERSION=0.85.2
+WINEZGUI_VERSION=0.86
 FLATPAK_PROTON_VERSION=7.29
 BRANCH=21.08
 
