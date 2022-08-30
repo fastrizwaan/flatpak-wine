@@ -244,7 +244,9 @@ modules:
     build-commands:
     # 1. Build wine64
     - tar --zstd -xvf Proton-GE-7.29.tar.zst -C /app
-#    - rm -rf /app/share/wine/{mono,gecko} ; # to save space
+    - rm -rf /app/share/wine/{mono,gecko} ; # to reduce flatpak size
+    - sleep 3s; 
+    # Comment above rm -rf line to include mono and gecko in flatpak-proton
     sources:
        - type: file
          url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.29/Proton-GE-7.29.tar.zst
@@ -375,7 +377,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.86
+        tag: 0.86.1
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
