@@ -7,13 +7,13 @@ Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan
 ### !! Now using [WineZGUI](https://github.com/fastrizwaan/WineZGUI) with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge-7.29 !!
 
 
-[flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-wine7_0.86_20220828.flatpak) [for latest stable experience]
+[flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-wine7_0.86.1_20220830.flatpak) [for latest stable experience]
 
-[flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-wine5_0.86_20220828.flatpak) [for wine 5.0 compatible games]
+[flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-wine5_0.86.1_20220830.flatpak) [for wine 5.0 compatible games]
 
-[flatpak-proton-ge-7.29 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-proton-ge-7.29_0.86_20220828.flatpak) [for proton compatible games]
+[flatpak-proton-ge-7.29 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-proton-ge-7.29_0.86.1_20220830.flatpak) [for proton compatible games]
 
-[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-winezgui_0.86_20220828.flatpak) [stable wine from flathub]
+[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-winezgui_0.86.1_20220830.flatpak) [stable wine from flathub]
 
 ### For the impatient
 
@@ -26,15 +26,15 @@ flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-21.08
 
 # Download flatpak-wine 5.0.5 and flatpak-wine 7.0 and flatpak-proton and flatpak-winezgui can be installed together
 
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-proton-ge-7.29_0.86_20220828.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-wine5_0.86_20220828.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-wine7_0.86_20220828.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86/flatpak-winezgui_0.86_20220828.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-proton-ge-7.29_0.86.1_20220830.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-wine5_0.86.1_20220830.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-wine7_0.86.1_20220830.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.86.1/flatpak-winezgui_0.86.1_20220830.flatpak
 
-flatpak --user install flatpak-proton-ge-7.29_0.86_20220828.flatpak
-flatpak --user install flatpak-wine5_0.86_20220828.flatpak
-flatpak --user install flatpak-wine7_0.86_20220828.flatpak
-flatpak --user install flatpak-winezgui_0.86_20220828.flatpak
+flatpak --user install flatpak-proton-ge-7.29_0.86.1_20220830.flatpak
+flatpak --user install flatpak-wine5_0.86.1_20220830.flatpak
+flatpak --user install flatpak-wine7_0.86.1_20220830.flatpak
+flatpak --user install flatpak-winezgui_0.86.1_20220830.flatpak
 
 # Run
 flatpak run io.github.fastrizwaan.flatpak-proton
@@ -132,7 +132,7 @@ It's simple: build takes up to 2 hours (50 minutes on i7 4th gen)
 
 ```
 git clone https://github.com/fastrizwaan/flatpak-wine.git
-cd flatpak-wine/io.github.fastrizwaan.flatpak-wine7
+cd flatpak-wine/flatpak-wine7
 bash ./install.sh
 ```
 
