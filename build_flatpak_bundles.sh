@@ -1,1 +1,1 @@
-time for i in io*; do $i/install.sh bundle; done
+time for i in flatpak-*; do $i/install.sh bundle; done
