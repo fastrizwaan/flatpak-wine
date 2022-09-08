@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Where to build the flatpak?
+export FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR/flatpak-proton
+
 # 0. 1st update flatpaks 
 echo "Updating flatpaks"
 flatpak update -y
@@ -35,7 +38,7 @@ echo "SRC_DIR = $SRC_DIR"
 
 if ! [ -f "${ProtonGE}.tar.zst" ]; then
 echo "Creating ${ProtonGE}.tar.zst..."
-tar -I "zstd -10 -T0" -cf "${ProtonGE}.tar.zst" -C "${Proton_GE_Dir}" . && \
+tar -I "zstd -10 -T0" -cf "${FLATPAK_BUILD_DIR}/${ProtonGE}.tar.zst" -C "${Proton_GE_Dir}" . && \
 echo "Created..."
 
 else 
@@ -66,8 +69,6 @@ echo SCRIPT_DIR=$(dirname ${SCRIPT_NAME})
 
 
 # Where to build the flatpak?
-export FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR/flatpak-proton
-
 mkdir -p ${FLATPAK_BUILD_DIR}
 
 # Remove symoblic links if exist in build_dir
