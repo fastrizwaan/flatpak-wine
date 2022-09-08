@@ -330,7 +330,6 @@ modules:
     - mkdir /app/flatpak_manifest_and_build_script
     - install -Dm644 $FLATPAK_ID.yml /app/flatpak_manifest_and_build_script
     - install -Dm644 install.sh /app/flatpak_manifest_and_build_script
-    - install -Dm644 create_proton_tar_file.sh /app/flatpak_manifest_and_build_script
     - install -Dm644 sha256sums.txt /app/flatpak_manifest_and_build_script
     sources:
     - type: file
