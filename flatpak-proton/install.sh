@@ -36,7 +36,7 @@ sudo flatpak install flathub --system -y com.valvesoftware.Steam.CompatibilityTo
 SRC_DIR=$(dirname $(realpath $0))
 echo "SRC_DIR = $SRC_DIR"
 
-if ! [ -f "${ProtonGE}.tar.zst" ]; then
+if ! [ -f "${FLATPAK_BUILD_DIR}/${ProtonGE}.tar.zst" ]; then
 echo "Creating ${ProtonGE}.tar.zst..."
 tar -I "zstd -10 -T0" -cf "${FLATPAK_BUILD_DIR}/${ProtonGE}.tar.zst" -C "${Proton_GE_Dir}" . && \
 echo "Created..."
