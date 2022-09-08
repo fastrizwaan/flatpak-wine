@@ -226,6 +226,7 @@ modules:
                 
 # bundle flatpak-proton
   - name: proton-stable
+    buildsystem: simple
     build-commands:
     # 1. Build wine64
     - tar --zstd -xvf Proton-GE-7.31.tar.zst -C /app
@@ -348,7 +349,7 @@ modules:
         # (PROTON.VERSION) will be changed by install.sh
     sources:
       - type: git
-        tag: 0.86.1
+        tag: 0.87
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
