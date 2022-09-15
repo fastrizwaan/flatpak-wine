@@ -1,8 +1,0 @@
-/build-dir
-/.flatpak-builder
-/repo
-/*.flatpak
-/flatpak-wine
-/tmp*
-/SHA256SUM
-/bundle-install-commands.sh

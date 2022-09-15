@@ -1,2 +1,0 @@
-02dcd7f753abb7372d88f24e0886a56fe865f1d1935b86eee4009ef8077a89e1  io.github.fastrizwaan.flatpak-wine7.yml
-ecfd022b4cae6364744164b76a4be74d1bf4b2bbf4e93da746859234656b4ec8  install.sh

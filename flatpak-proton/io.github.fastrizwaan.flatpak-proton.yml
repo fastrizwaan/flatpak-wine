@@ -234,11 +234,11 @@ modules:
     - sleep 3s; 
     # Comment above rm -rf line to include mono and gecko in flatpak-proton
     sources:
-#       - type: file
-         #url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.29/Proton-GE-7.31.tar.zst
-         #sha256: 816169be7145288de717571dfa4d53602fe2ed20aa677ffe9d1fa6f06d898f8e
-      - type: file
-        path : Proton-GE-7.31.tar.zst
+       - type: file
+         url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.31/Proton-GE-7.31.tar.zst
+         sha256: 9f8da2805e8c865f5c02a57f089603ae79096460497dd7e550e38c2d1649d11c
+      #- type: file
+      #  path : Proton-GE-7.31.tar.zst
 
 
 
@@ -348,7 +348,7 @@ modules:
         # (PROTON.VERSION) will be changed by install.sh
     sources:
       - type: git
-        tag: 0.87
+        branch: new
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
