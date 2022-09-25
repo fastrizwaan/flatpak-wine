@@ -1,10 +1,10 @@
 app-id: io.github.fastrizwaan.flatpak-wine7
-base-version: '21.08'
+base-version: '22.08'
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: winezgui
-branch: '21.08'
+branch: '22.08'
 separate-locales: false
 
 command: winezgui
@@ -15,16 +15,16 @@ rename-desktop-file: io.github.fastrizwaan.WineZGUI.desktop
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '21.08'
+    version: '22.08'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '21.08'
+    version: '22.08'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    versions: "21.08;1.4"
+    versions: "22.08;1.4"
     version: '1.4'
     subdirectories: true
     no-autodownload: true
@@ -40,7 +40,7 @@ add-extensions:
       no-autodownload: true
       download-if: active-gl-driver
       enable-if: active-gl-driver
-      version: '21.08'
+      version: '22.08'
   
   org.freedesktop.Platform.VAAPI.Intel.i386:
       directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
@@ -49,18 +49,18 @@ add-extensions:
       add-ld-path: lib
       download-if: active-gl-driver
       enable-if: active-gl-driver
-      version: '21.08'
+      version: '22.08'
   
   org.freedesktop.Platform.ffmpeg-full:
       directory: lib/ffmpeg
       add-ld-path: .
-      version: '21.08'
+      version: '22.08'
       autodelete: false
 
   org.freedesktop.Platform.ffmpeg_full.i386:
       directory: lib32/ffmpeg
       add-ld-path: .
-      version: '21.08'
+      version: '22.08'
       autodelete: false
       
 # Support 32-bit at buildtime
@@ -93,7 +93,8 @@ modules:
   - name: compat
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu 
+      - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
       - mkdir -p /app/lib/debug/lib/i386-linux-gnu
       - mkdir -p /app/lib/dri/intel-vaapi-driver
       - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
@@ -447,7 +448,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.87
+        tag: 0.86.2
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:

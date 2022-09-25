@@ -1,10 +1,10 @@
 app-id: io.github.fastrizwaan.flatpak-proton
-base-version: '21.08'
+base-version: '22.08'
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: winezgui
-branch: '21.08'
+branch: '22.08'
 separate-locales: false
 
 command: winezgui
@@ -15,16 +15,16 @@ rename-desktop-file: io.github.fastrizwaan.WineZGUI.desktop
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '21.08'
+    version: '22.08'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '21.08'
+    version: '22.08'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    versions: "21.08;1.4"
+    versions: "22.08;1.4"
     version: '1.4'
     subdirectories: true
     no-autodownload: true
@@ -40,7 +40,7 @@ add-extensions:
       no-autodownload: true
       download-if: active-gl-driver
       enable-if: active-gl-driver
-      version: '21.08'
+      version: '22.08'
   
   org.freedesktop.Platform.VAAPI.Intel.i386:
       directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
@@ -49,18 +49,18 @@ add-extensions:
       add-ld-path: lib
       download-if: active-gl-driver
       enable-if: active-gl-driver
-      version: '21.08'
+      version: '22.08'
   
   org.freedesktop.Platform.ffmpeg-full:
       directory: lib/ffmpeg
       add-ld-path: .
-      version: '21.08'
+      version: '22.08'
       autodelete: false
 
   org.freedesktop.Platform.ffmpeg_full.i386:
       directory: lib32/ffmpeg
       add-ld-path: .
-      version: '21.08'
+      version: '22.08'
       autodelete: false
       
 # Support 32-bit at buildtime
@@ -97,7 +97,8 @@ modules:
   - name: compat
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu 
+      - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
       - mkdir -p /app/lib/debug/lib/i386-linux-gnu
       - mkdir -p /app/lib/dri/intel-vaapi-driver
       - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
@@ -229,16 +230,15 @@ modules:
     buildsystem: simple
     build-commands:
     # 1. Build wine64
-    - tar --zstd -xvf Proton-GE-7.31.tar.zst -C /app
+    - tar --zstd -xvf Proton-GE-7.35.tar.zst -C /app
     - rm -rf /app/share/wine/{mono,gecko} ; # to reduce flatpak size
-    - sleep 3s; 
     # Comment above rm -rf line to include mono and gecko in flatpak-proton
     sources:
-       - type: file
-         url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.31/Proton-GE-7.31.tar.zst
-         sha256: 9f8da2805e8c865f5c02a57f089603ae79096460497dd7e550e38c2d1649d11c
-      #- type: file
-      #  path : Proton-GE-7.31.tar.zst
+#       - type: file
+         #url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.29/-.tar.zst
+         #sha256: 816169be7145288de717571dfa4d53602fe2ed20aa677ffe9d1fa6f06d898f8e
+      - type: file
+        path: Proton-GE-7.35.tar.zst #proton-source
 
 
 
@@ -343,12 +343,12 @@ modules:
     buildsystem: simple
     build-commands:
       - ./setup --install --flatpak --prefix=/app --flatpak-id=$FLATPAK_ID
-      - desktop-file-edit --set-name="WineZGUI (Proton-GE-7.31)" 
+      - desktop-file-edit --set-name="WineZGUI (Proton-GE-7.35)" 
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
         # (PROTON.VERSION) will be changed by install.sh
     sources:
       - type: git
-        branch: new
+        tag: 0.86.2
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:

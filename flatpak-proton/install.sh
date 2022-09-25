@@ -1,5 +1,73 @@
 #!/bin/bash
 
+# Where to build the flatpak?
+export FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR/flatpak-proton
+
+# 0. 1st update flatpaks 
+echo "Updating flatpaks"
+flatpak update -y
+
+# 0.1 Create Shasums
+sha256sum * > sha256sums.txt
+
+Proton_GE_Dir="/var/lib/flatpak/runtime/com.valvesoftware.Steam.CompatibilityTool.Proton-GE/x86_64/stable/active/files"
+
+APP_ID="io.github.fastrizwaan.flatpak-proton"
+SHORT_APP_ID="flatpak-proton-ge"
+DATE=$(date +'%Y%m%d')
+
+WINEZGUI_VERSION=new
+
+if [ "${1}" = "sdk" ] ; then
+     flatpak remove --user --all ; # Run as user
+     sudo flatpak --system remote-add --if-not-exists \
+     flathub https://flathub.org/repo/flathub.flatpakrepo 
+     for i in "org.freedesktop.Platform//22.08" \
+              "org.freedesktop.Platform.Compat.i386//22.08" \
+              "org.freedesktop.Platform.GL.default//22.08" \
+              "org.freedesktop.Platform.GL32.default//22.08" \
+              "org.freedesktop.Platform.ffmpeg-full//22.08" \
+              "org.freedesktop.Sdk//22.08" \
+              "org.freedesktop.Sdk.Compat.i386//22.08" \
+              "org.freedesktop.Sdk.Extension.toolchain-i386//22.08"
+         do 
+         flatpak --user remove -y "$i"
+         flatpak --system -y install "$i"; 
+     done
+fi
+
+BRANCH=22.08
+
+# 1. Get Version from flatpak Proton GE
+echo "Tyring to Get Version from ${Proton_GE_Dir}/version"
+FileVersion=$(cat "${Proton_GE_Dir}/version" |cut -f2- -d '-')
+Name=$(echo $FileVersion|sed 's/GE-Proton\([0-9].*\)/Proton-GE/g')
+Ver=$(echo $FileVersion|sed 's/GE-Proton//g'|sed 's/-/\./g')
+ProtonGE="${Name}-${Ver}"
+echo "Got ${FileVersion}, using ${ProtonGE}"
+
+# Version
+FLATPAK_PROTON_VERSION=${Ver}
+
+# 2. Create tar.zst
+sudo flatpak install flathub --system -y com.valvesoftware.Steam.CompatibilityTool.Proton-GE/x86_64/stable
+SRC_DIR=$(dirname $(realpath $0))
+echo "SRC_DIR = $SRC_DIR"
+
+if ! [ -f "${FLATPAK_BUILD_DIR}/${ProtonGE}.tar.zst" ]; then
+echo "Creating ${ProtonGE}.tar.zst..."
+tar -I "zstd -10 -T0" -cf "${FLATPAK_BUILD_DIR}/${ProtonGE}.tar.zst" -C "${Proton_GE_Dir}" . && \
+echo "Created..."
+
+else 
+echo "${ProtonGE}.tar.zst already exists, using it. Delete it, if you want to recreate"
+fi
+
+# 3. Change Proton Version in yml file
+sed "s/- tar --zstd -xvf.*/- tar --zstd -xvf ${ProtonGE}.tar.zst -C \/app/g" -i ${APP_ID}.yml
+sed "s/path:.*#proton-source/path: ${ProtonGE}.tar.zst #proton-source/g"     -i ${APP_ID}.yml
+sed "s/--set-name=\"WineZGUI (.*)\"/--set-name=\"WineZGUI (${ProtonGE})\"/g" -i ${APP_ID}.yml
+
 # flatpak-builder installed?
 if ! command -v flatpak-builder &>/dev/null; then
      echo "Please install 'flatpak-builder' using your distro's package manager"
@@ -11,13 +79,6 @@ if ! command -v flatpak-builder &>/dev/null; then
      exit 1
 fi
 
-APP_ID="io.github.fastrizwaan.flatpak-proton"
-SHORT_APP_ID="flatpak-proton"
-DATE=$(date +'%Y%m%d')
-
-WINEZGUI_VERSION=0.87
-BRANCH=21.08
-
 # handle relative path for building
 SCRIPT_NAME="$(realpath -m $0)"
 SCRIPT_DIR=$(dirname ${SCRIPT_NAME})
@@ -27,8 +88,6 @@ echo SCRIPT_DIR=$(dirname ${SCRIPT_NAME})
 
 
 # Where to build the flatpak?
-export FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR/flatpak-proton
-
 mkdir -p ${FLATPAK_BUILD_DIR}
 
 # Remove symoblic links if exist in build_dir
@@ -45,27 +104,34 @@ echo \
 flatpak remove --user --all ; # Run as user
 sudo flatpak --system remote-add --if-not-exists \
 flathub https://flathub.org/repo/flathub.flatpakrepo 
-sudo flatpak --system -y install flathub org.freedesktop.Sdk/x86_64/21.08; 
-sudo flatpak --system -y install flathub org.freedesktop.Platform/x86_64/21.08; 
-sudo flatpak --system -y install flathub org.winehq.Wine/x86_64/stable-21.08
-sudo flatpak --system -y install flathub runtime/org.freedesktop.Sdk.Compat.i386/x86_64/21.08
-sudo flatpak --system -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/21.08
+flatpak --system -y install flathub org.freedesktop.Platform//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.Compat.i386//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.GL.default//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.GL32.default//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.ffmpeg-full//22.08
+flatpak --system -y install flathub org.freedesktop.Sdk//22.08
+flatpak --system -y install flathub org.freedesktop.Sdk.Compat.i386//22.08
+flatpak --system -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386//22.08
 #------------------------user----------------------------------------------
 flatpak --user remote-add --if-not-exists \
 flathub https://flathub.org/repo/flathub.flatpakrepo 
-flatpak --user -y install flathub org.freedesktop.Sdk/x86_64/21.08; 
-flatpak --user -y install flathub org.freedesktop.Platform/x86_64/21.08; 
-flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-21.08
-flatpak --user -y install flathub runtime/org.freedesktop.Sdk.Compat.i386/x86_64/21.08
-flatpak --user -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/21.08
+flatpak --user -y install flathub org.freedesktop.Platform//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.Compat.i386//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.GL.default//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.GL32.default//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.ffmpeg-full//22.08
+flatpak --user -y install flathub org.freedesktop.Sdk//22.08
+flatpak --user -y install flathub org.freedesktop.Sdk.Compat.i386//22.08
+flatpak --user -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386//22.08
 #------------------------user----------------------------------------------'
+
 
 flatpak-builder --force-clean build-dir ${APP_ID}.yml || (echo "Build failed" ; exit 1)
 
 # Prefer system install
 if [ "$1" = "user" ]; then
      echo "Installing ${APP_ID}..."
-     flatpak-builder --user --install --force-clean build-dir ${APP_ID}.yml && \
+     flatpak-builder --user --install --force-clean build-dir ${APP_ID}.yml 2> /dev/null && \
      (echo -e "\n\nSuccessfully installed ${APP_ID} flatpak as user ${USER}!";
    	  echo -e "run:\nflatpak run ${APP_ID}") || (echo "Install failed" ; exit 1)
 
@@ -79,11 +145,10 @@ else
 
 fi
 
-
 # Create flatpak bundle?
 if [ "$1" = "bundle" ]; then
      MSG=("Please wait building bundle...")
-     BUNDLE="${SHORT_APP_ID}_${WINEZGUI_VERSION}_${DATE}.flatpak"
+     BUNDLE="${SHORT_APP_ID}-${FLATPAK_PROTON_VERSION}_${WINEZGUI_VERSION}_${DATE}.flatpak"
      #REPO=~/.local/share/flatpak/repo
      REPO=/var/lib/flatpak/repo
    

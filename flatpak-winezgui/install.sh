@@ -15,8 +15,28 @@ APP_ID="io.github.fastrizwaan.WineZGUI"
 SHORT_APP_ID="flatpak-winezgui"
 DATE=$(date +'%Y%m%d')
 
-WINEZGUI_VERSION=0.87
-BRANCH=21.08
+WINEZGUI_VERSION=new
+
+if [ "${1}" = "sdk" ] ; then
+     flatpak remove --user --all ; # Run as user
+     sudo flatpak --system remote-add --if-not-exists \
+     flathub https://flathub.org/repo/flathub.flatpakrepo 
+     for i in "org.freedesktop.Platform//22.08" \
+              "org.freedesktop.Platform.Compat.i386//22.08" \
+              "org.freedesktop.Platform.GL.default//22.08" \
+              "org.freedesktop.Platform.GL32.default//22.08" \
+              "org.freedesktop.Platform.ffmpeg-full//22.08" \
+              "org.freedesktop.Sdk//22.08" \
+              "org.freedesktop.Sdk.Compat.i386//22.08" \
+              "org.freedesktop.Sdk.Extension.toolchain-i386//22.08" \
+              "org.winehq.Wine//stable-22.08"
+         do 
+         flatpak --user remove -y "$i"
+         flatpak --system -y install "$i"; 
+     done
+fi
+
+BRANCH=22.08
 
 # handle relative path for building
 SCRIPT_NAME="$(realpath -m $0)"
@@ -45,20 +65,30 @@ echo \
 flatpak remove --user --all ; # Run as user
 sudo flatpak --system remote-add --if-not-exists \
 flathub https://flathub.org/repo/flathub.flatpakrepo 
-sudo flatpak --system -y install flathub org.freedesktop.Sdk/x86_64/21.08; 
-sudo flatpak --system -y install flathub org.freedesktop.Platform/x86_64/21.08; 
-sudo flatpak --system -y install flathub org.winehq.Wine/x86_64/stable-21.08
-sudo flatpak --system -y install flathub runtime/org.freedesktop.Sdk.Compat.i386/x86_64/21.08
-sudo flatpak --system -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/21.08
+flatpak --system -y install flathub org.freedesktop.Platform//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.Compat.i386//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.GL.default//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.GL32.default//22.08
+flatpak --system -y install flathub org.freedesktop.Platform.ffmpeg-full//22.08
+flatpak --system -y install flathub org.freedesktop.Sdk//22.08
+flatpak --system -y install flathub org.freedesktop.Sdk.Compat.i386//22.08
+flatpak --system -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386//22.08
+flatpak --system -y install flathub org.winehq.Wine//stable-22.08
 #------------------------user----------------------------------------------
 flatpak --user remote-add --if-not-exists \
 flathub https://flathub.org/repo/flathub.flatpakrepo 
-flatpak --user -y install flathub org.freedesktop.Sdk/x86_64/21.08; 
-flatpak --user -y install flathub org.freedesktop.Platform/x86_64/21.08; 
-flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-21.08
-flatpak --user -y install flathub runtime/org.freedesktop.Sdk.Compat.i386/x86_64/21.08
-flatpak --user -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386/x86_64/21.08
+flatpak --user -y install flathub org.freedesktop.Platform//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.Compat.i386//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.GL.default//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.GL32.default//22.08
+flatpak --user -y install flathub org.freedesktop.Platform.ffmpeg-full//22.08
+flatpak --user -y install flathub org.freedesktop.Sdk//22.08
+flatpak --user -y install flathub org.freedesktop.Sdk.Compat.i386//22.08
+flatpak --user -y install flathub org.freedesktop.Sdk.Extension.toolchain-i386//22.08
+flatpak --user -y install flathub org.winehq.Wine//stable-22.08
 #------------------------user----------------------------------------------'
+
+
 
 flatpak-builder --force-clean build-dir ${APP_ID}.yml || (echo "Build failed" ; exit 1)
 

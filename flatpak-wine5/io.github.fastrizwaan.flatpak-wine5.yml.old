@@ -1,4 +1,4 @@
-app-id: io.github.fastrizwaan.flatpak-proton
+app-id: io.github.fastrizwaan.flatpak-wine5
 base-version: '21.08'
 runtime: org.freedesktop.Platform
 runtime-version: '21.08'
@@ -8,8 +8,8 @@ branch: '21.08'
 separate-locales: false
 
 command: winezgui
-rename-icon: io.github.fastrizwaan.WineZGUI
-rename-desktop-file: io.github.fastrizwaan.WineZGUI.desktop
+rename-icon: winezgui
+rename-desktop-file: winezgui.desktop
 
 # Support 32-bit at runtime
 add-extensions:
@@ -79,18 +79,14 @@ finish-args:
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --talk-name=org.freedesktop.Flatpak
   - --filesystem=host
-#  - --filesystem=~/.local/share/flatpak-proton/:create
+#  - --filesystem=~/.local/share/flatpak-wine50/:create
   - --device=all
   # wineprefixes are created here
-#  - --persist=~/.local/share/flatpak-proton/
+#  - --persist=~/.local/share/flatpak-wine50/
   # Support 32-bit runtime
   # Testing for Driver San andreas- --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine:$(pwd)
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib:/app/lib32:/app/lib64:/app/lib/i386-linux-gnu:/app/lib/wine:/app/lib64/wine
 
-build-options:
-  - strip: true
-  - make-args: -j $FLATPAK_BUILDER_N_JOBS
-  
 modules:
 
   # Create 32-bit directories
@@ -110,6 +106,8 @@ modules:
       
 # libusb
   - name: libusb-64bit
+    strip: true
+    no-debuginfo: true  
     config-opts: 
       - --disable-static
       - --enable-shared     
@@ -120,6 +118,8 @@ modules:
 
 
   - name: libusb-32bit
+    strip: true
+    no-debuginfo: true  
     config-opts: 
       - --disable-static
       - --enable-shared     
@@ -131,7 +131,8 @@ modules:
         CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
-
+      strip: true
+      no-debuginfo: true
     sources:
       - type: archive
         url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
@@ -140,8 +141,10 @@ modules:
 
 # vkd3d
   - name: vkd3d-64bit
+    build-options:
 
-  
+      strip: true
+      no-debuginfo: true  
     config-opts: 
       - --disable-static
       - --enable-shared     
@@ -170,7 +173,8 @@ modules:
         CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
-
+      strip: true
+      no-debuginfo: true
     sources: 
       - type: archive
         url: "https://dl.winehq.org/vkd3d/source/vkd3d-1.4.tar.xz"
@@ -187,7 +191,8 @@ modules:
             CC:  i686-unknown-linux-gnu-gcc
             CXX: i686-unknown-linux-gnu-g++
           libdir: /app/lib32
-     
+          strip: true
+          no-debuginfo: true        
         sources:
           - type: archive
             url: https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/1.5.4.raytracing.fixed.tar.gz
@@ -203,6 +208,8 @@ modules:
         CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
 
     config-opts:
       - -DGSTREAMER=ON
@@ -215,7 +222,8 @@ modules:
   - name: faudio-64bit
     buildsystem: cmake-ninja
     build-options:
-
+      strip: true
+      no-debuginfo: true  
     config-opts:
       - -DGSTREAMER=ON
     sources:
@@ -223,29 +231,102 @@ modules:
         url: https://github.com/FNA-XNA/FAudio/archive/22.06/FAudio-22.06.tar.gz 
         sha256: 6cc2480a191ecfd6a2b6c57af3c21307ffb8a4d4af95769386590e9a33ea1750
         
+
+
                 
-# bundle flatpak-proton
-  - name: proton-stable
+# build wow64              
+  - name: wine-wow-5.0.5
+    builddir: true
+    build-options:
+      make-args: -j $FLATPAK_BUILDER_N_JOBS
+      prefix: /app
+      prepend-path: /app/bin
+      ldflags: -L/app/lib64 -L/app/lib -L/app/lib32
+      append-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC:  i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
+      
+    make-install-args:
+      - LDCONFIG=/bin/true
+      - STRIP=/bin/true
+      - UPDATE_DESKTOP_DATABASE=/bin/true
     buildsystem: simple
     build-commands:
     # 1. Build wine64
-    - tar --zstd -xvf Proton-GE-7.31.tar.zst -C /app
-    - rm -rf /app/share/wine/{mono,gecko} ; # to reduce flatpak size
-    - sleep 3s; 
-    # Comment above rm -rf line to include mono and gecko in flatpak-proton
+    - export CC=x86_64-unknown-linux-gnu-gcc  &&
+      export CXX=x86_64-unknown-linux-gnu-g++ &&
+      mkdir wine64-build && cd wine64-build   &&
+      ../configure 
+      --prefix="/app" 
+      --enable-shared      
+      --disable-static
+      --disable-win16
+      --disable-tests
+      --with-x
+      --without-curses
+      --without-capi
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-netapi
+      --enable-win64 &&  
+      make -j $FLATPAK_BUILDER_N_JOBS
+
+    # 2. Build wine32 twice
+    - export CC=i686-unknown-linux-gnu-gcc  &&
+      export CXX=i686-unknown-linux-gnu-g++ &&
+      mkdir wine32-tools && cd wine32-tools &&
+      ../configure 
+      --prefix="/app" 
+      --enable-shared
+      --disable-static
+      --disable-win16
+      --disable-tests
+      --with-x
+      --without-curses
+      --without-capi
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-netapi &&
+      make -j $FLATPAK_BUILDER_N_JOBS
+
+    # 3. Build 32bit second time and 
+    # install 32 bit and 64 bit wine
+    - export CC=i686-unknown-linux-gnu-gcc  &&
+      export CXX=i686-unknown-linux-gnu-g++ &&
+      mkdir wine32-combo && cd wine32-combo &&
+      ../configure 
+      --with-wine64=../wine64-build
+      --with-wine-tools=../wine32-tools
+      --prefix="/app" 
+      --enable-shared      
+      --disable-static
+      --disable-win16
+      --disable-tests
+      --with-x
+      --without-curses
+      --without-capi
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-netapi   &&
+      make -j $FLATPAK_BUILDER_N_JOBS           && 
+      make install       && 
+      cd ../wine64-build && 
+      make install
+
     sources:
-#       - type: file
-         #url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.29/Proton-GE-7.31.tar.zst
-         #sha256: 816169be7145288de717571dfa4d53602fe2ed20aa677ffe9d1fa6f06d898f8e
-      - type: file
-        path : Proton-GE-7.31.tar.zst
-
-
-
+      - type: archive
+        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.5.tar.xz
+        sha512: 3cf0ccb2eac0868f700296a62aeea9b856522ac63861beb49deed50136a334c450f2d1172f9d0195b4fe0bbf8f808f7350a79122726da1cbf5d21161f6dfca36
         
   - name: winetricks
     buildsystem: simple
-
     build-commands:
     - make
     - make PREFIX=/app install
@@ -257,8 +338,6 @@ modules:
       
   - name: cabextract
     buildsystem: autotools
-
-
     sources:
     - type: archive
       url: https://www.cabextract.org.uk/cabextract-1.6.tar.gz
@@ -266,15 +345,18 @@ modules:
   
   - name: wget
     buildsystem: autotools
-
-
+    strip: true
+    no-debuginfo: true
+      
     sources:
     - type: archive
       url: https://ftp.gnu.org/gnu/wget/wget-1.19.4.tar.gz
       sha256: 93fb96b0f48a20ff5be0d9d9d3c4a986b469cb853131f9d5fe4cc9cecbc8b5b5
 
   - name: icoutils
-
+    build-options:
+      #strip: true
+      no-debuginfo: true  
     buildsystem: autotools
     sources:
       - type: archive
@@ -305,8 +387,6 @@ modules:
   
   - name: exiftool
     buildsystem: simple
-
-
     build-commands:
       - perl Makefile.PL
       - make
@@ -317,7 +397,9 @@ modules:
         sha256: 654f401daab0045a8364fa59d3f69b6f9bf23bcef157a3c928e373884a6f9370
         
   - name: desktop-file-utils
-
+    build-options:
+      #strip: true
+      no-debuginfo: true  
     buildsystem: autotools
     sources:
       - type: archive
@@ -330,12 +412,11 @@ modules:
     - mkdir /app/flatpak_manifest_and_build_script
     - install -Dm644 $FLATPAK_ID.yml /app/flatpak_manifest_and_build_script
     - install -Dm644 install.sh /app/flatpak_manifest_and_build_script
-    - install -Dm644 sha256sums.txt /app/flatpak_manifest_and_build_script
     sources:
     - type: file
       path: install.sh
     - type: file
-      path: io.github.fastrizwaan.flatpak-proton.yml
+      path: io.github.fastrizwaan.flatpak-wine5.yml
     - type: file
       path: sha256sums.txt
 
@@ -343,12 +424,11 @@ modules:
     buildsystem: simple
     build-commands:
       - ./setup --install --flatpak --prefix=/app --flatpak-id=$FLATPAK_ID
-      - desktop-file-edit --set-name="WineZGUI (Proton-GE-7.31)" 
-        /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
-        # (PROTON.VERSION) will be changed by install.sh
+      - desktop-file-edit --set-name="WineZGUI (flatpak-wine5)" 
+        /app/share/applications/winezgui.desktop
     sources:
       - type: git
-        tag: 0.87
+        branch: 0.84
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
