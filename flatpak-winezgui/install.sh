@@ -18,7 +18,6 @@ DATE=$(date +'%Y%m%d')
 WINEZGUI_VERSION=new
 
 if [ "${1}" = "sdk" ] ; then
-     flatpak remove --user --all ; # Run as user
      sudo flatpak --system remote-add --if-not-exists \
      flathub https://flathub.org/repo/flathub.flatpakrepo 
      for i in "org.freedesktop.Platform//22.08" \
@@ -62,7 +61,6 @@ cd ${FLATPAK_BUILD_DIR}
 echo "Install these Dependencies in the system or as user"
 echo \
 '#-----------------------system---------------------------------------
-flatpak remove --user --all ; # Run as user
 sudo flatpak --system remote-add --if-not-exists \
 flathub https://flathub.org/repo/flathub.flatpakrepo 
 flatpak --system -y install flathub org.freedesktop.Platform//22.08
