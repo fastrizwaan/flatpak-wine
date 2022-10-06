@@ -15,7 +15,7 @@ APP_ID="io.github.fastrizwaan.WineZGUI"
 SHORT_APP_ID="flatpak-winezgui"
 DATE=$(date +'%Y%m%d')
 
-WINEZGUI_VERSION=0.86.2
+WINEZGUI_VERSION=0.88
 
 if [ "${1}" = "sdk" ] ; then
      sudo flatpak --system remote-add --if-not-exists \
