@@ -6,14 +6,14 @@ Official stable Wine 5.0.5 and 7.0 in flatpaks for all flatpak supported distrib
 
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
-### !! Now using [WineZGUI](https://github.com/fastrizwaan/WineZGUI) with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge-7.31 !!
+### !! Now using [WineZGUI](https://github.com/fastrizwaan/WineZGUI) with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge !!
 
 
 [flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.88/flatpak-wine7_0.88_20221006.flatpak) [for latest stable experience]
 
 [flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.88/flatpak-wine5_0.88_20221006.flatpak) [for wine 5.0 compatible games]
 
-[flatpak-proton-ge-7.31 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.88/flatpak-proton-ge-7.36_0.88_20221006.flatpak) [for proton compatible games]
+[flatpak-proton-ge with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.88/flatpak-proton-ge-7.36_0.88_20221006.flatpak) [for proton compatible games]
 
 [flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.88/flatpak-winezgui_0.88_20221006.flatpak) [stable wine from flathub]
 
