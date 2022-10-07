@@ -448,7 +448,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.88
+        tag: 0.88.1
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
