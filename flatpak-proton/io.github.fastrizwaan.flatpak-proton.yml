@@ -230,7 +230,7 @@ modules:
     buildsystem: simple
     build-commands:
     # 1. Build wine64
-    - tar --zstd -xvf Proton-GE-7.35.tar.zst -C /app
+    - tar --zstd -xvf Proton-GE-7.36.tar.zst -C /app
     - rm -rf /app/share/wine/{mono,gecko} ; # to reduce flatpak size
     # Comment above rm -rf line to include mono and gecko in flatpak-proton
     sources:
@@ -238,7 +238,7 @@ modules:
          #url: https://github.com/fastrizwaan/proton-ge-from-flathub/releases/download/7.29/-.tar.zst
          #sha256: 816169be7145288de717571dfa4d53602fe2ed20aa677ffe9d1fa6f06d898f8e
       - type: file
-        path: Proton-GE-7.35.tar.zst #proton-source
+        path: Proton-GE-7.36.tar.zst #proton-source
 
 
 
@@ -343,7 +343,7 @@ modules:
     buildsystem: simple
     build-commands:
       - ./setup --install --flatpak --prefix=/app --flatpak-id=$FLATPAK_ID
-      - desktop-file-edit --set-name="WineZGUI (Proton-GE-7.35)" 
+      - desktop-file-edit --set-name="WineZGUI (Proton-GE-7.36)" 
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
         # (PROTON.VERSION) will be changed by install.sh
     sources:
