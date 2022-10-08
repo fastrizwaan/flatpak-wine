@@ -15,7 +15,7 @@ APP_ID="io.github.fastrizwaan.WineZGUI"
 SHORT_APP_ID="flatpak-winezgui"
 DATE=$(date +'%Y%m%d')
 
-WINEZGUI_VERSION=0.88.1
+WINEZGUI_VERSION=0.88.3
 
 if [ "${1}" = "sdk" ] ; then
      sudo flatpak --system remote-add --if-not-exists \
@@ -88,18 +88,18 @@ flatpak --user -y install flathub org.winehq.Wine//stable-22.08
 
 
 
-flatpak-builder --force-clean build-dir ${APP_ID}.yml || (echo "Build failed" ; exit 1)
-
 # Prefer system install
 if [ "$1" = "user" ]; then
      echo "Installing ${APP_ID}..."
-     flatpak-builder --user --install --force-clean build-dir ${APP_ID}.yml && \
+     flatpak-builder --force-clean build-dir ${APP_ID}.yml || (echo "Build failed" ; exit 1)
+     flatpak-builder --user --install --force-clean build-dir ${APP_ID}.yml 2> /dev/null && \
      (echo -e "\n\nSuccessfully installed ${APP_ID} flatpak as user ${USER}!";
    	  echo -e "run:\nflatpak run ${APP_ID}") || (echo "Install failed" ; exit 1)
 
 
 else
      echo "Installing ${APP_ID}... systemwide"
+     flatpak-builder --force-clean build-dir-root ${APP_ID}.yml || (echo "Build failed" ; exit 1)
      sudo flatpak-builder --system --install --force-clean build-dir-root ${APP_ID}.yml && \
      (echo -e "\n\nSuccessfully installed ${APP_ID} flatpak system-wide!";
    	  echo -e "run:\nflatpak run ${APP_ID}") || (echo "Install failed" ; exit 1)
