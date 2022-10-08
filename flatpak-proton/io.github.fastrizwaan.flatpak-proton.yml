@@ -348,7 +348,7 @@ modules:
         # (PROTON.VERSION) will be changed by install.sh
     sources:
       - type: git
-        tag: 0.88.3
+        tag: 0.88.4
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
