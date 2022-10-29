@@ -102,8 +102,8 @@ modules:
       - make install 
     sources:
       - type: archive
-        url: https://exiftool.org/Image-ExifTool-12.41.tar.gz
-        sha256: 654f401daab0045a8364fa59d3f69b6f9bf23bcef157a3c928e373884a6f9370
+        url: https://exiftool.org/Image-ExifTool-12.49.tar.gz
+        sha256: 976d69d9a93ea5ef4649639ab6c190f58bf265f0057ca577c41dfcaf37b1715b
         
   - name: desktop-file-utils
     build-options:
@@ -122,5 +122,5 @@ modules:
       - ./setup --install --flatpak --prefix=/app
     sources:
       - type: git
-        tag: 0.88.6
+        tag: 0.88.8
         url: https://github.com/fastrizwaan/WineZGUI.git
