@@ -329,8 +329,8 @@ modules:
 
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/7.0/wine-7.0.tar.xz
-        sha512: eec17b046ed5447eb540f421c9b2748d9419ce087496c2743a9914fd27bbe5ff9da0cfe47d3cd76fa97323bd1188a1d82b1eef4968d86ed1957dc1a95e28529c
+        url: https://dl.winehq.org/wine/source/7.0/wine-7.0.1.tar.xz
+        sha256: 807caa78121b16250f240d2828a07ca4e3c609739e5524ef0f4cf89ae49a816c
         
   - name: winetricks
     buildsystem: simple
