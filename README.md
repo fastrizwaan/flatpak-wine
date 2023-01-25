@@ -1,10 +1,10 @@
-# Flatpak-Wine (wine-7.0) and (wine-5.0.5) and Flatpak-Proton GE 7.36 Stable
+# Flatpak-Wine (wine-8.0) (wine-7.0) and (wine-5.0.5) and Flatpak-Proton GE 7.36 Stable
 
 ![](https://github.com/fastrizwaan/WineZGUI/releases/download/0.88/winezgui-0.88.png)
 
 ### Updated to Using freedesktop sdk 22.08
 
-Official stable Wine 5.0.5 and 7.0 in flatpaks for all flatpak supported distributions (https://flatpak.org/setup/), along with WineZGUI (scripts) to manage bottles/wineprefixes. Winetricks is also included complementary :-)
+Official stable Wine 5.0.5 and 7.0 and 8.0 in flatpaks for all flatpak supported distributions (https://flatpak.org/setup/), along with WineZGUI (scripts) to manage bottles/wineprefixes. Winetricks is also included complementary :-)
 
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
