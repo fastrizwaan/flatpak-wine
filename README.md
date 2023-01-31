@@ -1,6 +1,6 @@
 # Flatpak-Wine (wine-8.0) (wine-7.0) and (wine-5.0.5) and Flatpak-Proton GE 7.36 Stable
 
-![](https://github.com/fastrizwaan/WineZGUI/releases/download/0.88/winezgui-0.88.png)
+![](https://github.com/fastrizwaan/WineZGUI/releases/download/0.91/winezgui-0.91.png)
 
 ### Updated to Using freedesktop sdk 22.08
 
@@ -10,14 +10,15 @@ Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan
 
 ### !! Now using [WineZGUI](https://github.com/fastrizwaan/WineZGUI) with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge !!
 
+[flatpak-wine 8.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine8_0.91_20230201.flatpak)
 
-[flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-wine7_0.90.10_20221208.flatpak) [for latest stable experience]
+[flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine7_0.91_20230201.flatpak) [for latest stable experience]
 
-[flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-wine5_0.90.10_20221208.flatpak) [for wine 5.0 compatible games]
+[flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine5_0.91_20230201.flatpak) [for wine 5.0 compatible games]
 
-[flatpak-proton-ge with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-proton-ge-7.36_0.90.10_20221208.flatpak) [for proton compatible games]
+[flatpak-proton-ge with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-proton-ge-7.36_0.91_20230201.flatpak) [for proton compatible games]
 
-[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-winezgui_0.90.10_20221208.flatpak) [stable wine from flathub]
+[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-winezgui_0.91_20230201.flatpak) [stable wine from flathub]
 
 ### For the impatient
 
@@ -28,19 +29,21 @@ In a terminal window, copy paste these:
 flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
 
-# Download flatpak-wine 5.0.5 and flatpak-wine 7.0 and flatpak-proton and flatpak-winezgui can be installed together
+# Download flatpak-wine 8,7,5,proton,flathub based flatpak-winezgui
 
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-wine8_0.90.10_20230126.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-proton-ge-7.36_0.90.10_20221208.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-wine5_0.90.10_20221208.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-wine7_0.90.10_20221208.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.90.10/flatpak-winezgui_0.90.10_20221208.flatpak
+### flatpak-wine, flatpak-proton and flatpak-winezgui can be installed together
 
-flatpak --user install flatpak-wine8_0.90.10_20230126.flatpak
-flatpak --user install flatpak-proton-ge-7.36_0.90.10_20221208.flatpak
-flatpak --user install flatpak-wine5_0.90.10_20221208.flatpak
-flatpak --user install flatpak-wine7_0.90.10_20221208.flatpak
-flatpak --user install flatpak-winezgui_0.90.10_20221208.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine8_0.91_20230126.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-proton-ge-7.36_0.91_20230201.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine5_0.91_20230201.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine7_0.91_20230201.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-winezgui_0.91_20230201.flatpak
+
+flatpak --user install flatpak-wine8_0.91_20230126.flatpak
+flatpak --user install flatpak-proton-ge-7.36_0.91_20230201.flatpak
+flatpak --user install flatpak-wine5_0.91_20230201.flatpak
+flatpak --user install flatpak-wine7_0.91_20230201.flatpak
+flatpak --user install flatpak-winezgui_0.91_20230201.flatpak
 
 # Run
 flatpak run io.github.fastrizwaan.flatpak-wine8
