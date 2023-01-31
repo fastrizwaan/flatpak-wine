@@ -1,6 +1,6 @@
 # Flatpak-Wine (wine-8.0) (wine-7.0) and (wine-5.0.5) and Flatpak-Proton GE 7.36 Stable
 
-![](https://github.com/fastrizwaan/WineZGUI/releases/download/0.91/winezgui-0.91.png)
+![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/winezgui-0.91.png)
 
 ### Updated to Using freedesktop sdk 22.08
 
