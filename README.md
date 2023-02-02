@@ -7,11 +7,11 @@
 Official stable Wine 5.0.5 and 7.0 and 8.0 in flatpaks for all flatpak supported distributions (https://flatpak.org/setup/), along with WineZGUI (scripts) to manage bottles/wineprefixes. Winetricks is also included complementary :-)
 
 ### Features
-[x] Create Shortcut for any selected exe.
-[x] Installer supported
-[x] Create Game Bundles and share
-[x] Save and Load Game (drive/users/$USER)
-[x] Template support
+- [x] Create Shortcut for any selected exe.
+- [x] Installer supported
+- [x] Create Game Bundles and share
+- [x] Save and Load Game (drive/users/$USER)
+- [x] Template support
 
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
