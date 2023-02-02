@@ -142,7 +142,6 @@ modules:
         url: https://github.com/libusb/libusb/releases/download/v1.0.26/libusb-1.0.26.tar.bz2
         sha256: 12ce7a61fc9854d1d2a1ffe095f7b5fac19ddba095c259e6067a46500381b5a5
 
-
 # vkd3d
   - name: vkd3d-64bit
     build-options:
@@ -448,7 +447,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.92
+        tag: 0.92.1
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
