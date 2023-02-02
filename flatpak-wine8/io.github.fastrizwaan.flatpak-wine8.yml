@@ -343,7 +343,7 @@ modules:
     sources:
     - type: git
       url: https://github.com/Winetricks/winetricks.git
-      commit: db1fd08852865d34eeb06f8c3213a43bb2aa7a1a
+      commit: b26dc5384e4dcfd6aa14beec8554d58696a46458
       
   - name: cabextract
     buildsystem: autotools
@@ -448,7 +448,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.91
+        tag: 0.92
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:

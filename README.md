@@ -1,24 +1,31 @@
 # Flatpak-Wine (wine-8.0) (wine-7.0) and (wine-5.0.5) and Flatpak-Proton GE 7.36 Stable
 
-![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/winezgui-0.91.png)
+![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/winezgui-0.92.png)
 
 ### Updated to Using freedesktop sdk 22.08
 
 Official stable Wine 5.0.5 and 7.0 and 8.0 in flatpaks for all flatpak supported distributions (https://flatpak.org/setup/), along with WineZGUI (scripts) to manage bottles/wineprefixes. Winetricks is also included complementary :-)
 
+### Features
+[x] Create Shortcut for any selected exe.
+[x] Installer supported
+[x] Create Game Bundles and share
+[x] Save and Load Game (drive/users/$USER)
+[x] Template support
+
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
 ### !! Now using [WineZGUI](https://github.com/fastrizwaan/WineZGUI) with flatpak-wine-5.0.5, fltpak-wine-7.0 and flatpak-proton-ge !!
 
-[flatpak-wine 8.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine8_0.91_20230201.flatpak)
+[flatpak-wine 8.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-wine8_0.92_20230202.flatpak)
 
-[flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine7_0.91_20230201.flatpak) [for latest stable experience]
+[flatpak-wine 7.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-wine7_0.92_20230202.flatpak) [for latest stable experience]
 
-[flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine5_0.91_20230201.flatpak) [for wine 5.0 compatible games]
+[flatpak-wine 5.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-wine5_0.92_20230202.flatpak) [for wine 5.0 compatible games]
 
-[flatpak-proton-ge with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-proton-ge-7.36_0.91_20230201.flatpak) [for proton compatible games]
+[flatpak-proton-ge with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-proton-ge-7.36_0.92_20230202.flatpak) [for proton compatible games]
 
-[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-winezgui_0.91_20230201.flatpak) [stable wine from flathub]
+[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-winezgui_0.92_20230202.flatpak) [stable wine from flathub]
 
 ### For the impatient
 
@@ -33,17 +40,17 @@ flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
 
 ### flatpak-wine, flatpak-proton and flatpak-winezgui can be installed together
 
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine8_0.91_20230126.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-proton-ge-7.36_0.91_20230201.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine5_0.91_20230201.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-wine7_0.91_20230201.flatpak
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.91/flatpak-winezgui_0.91_20230201.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-wine8_0.92_20230202.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-proton-ge-7.36_0.92_20230202.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-wine5_0.92_20230202.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-wine7_0.92_20230202.flatpak
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92/flatpak-winezgui_0.92_20230202.flatpak
 
-flatpak --user install flatpak-wine8_0.91_20230126.flatpak
-flatpak --user install flatpak-proton-ge-7.36_0.91_20230201.flatpak
-flatpak --user install flatpak-wine5_0.91_20230201.flatpak
-flatpak --user install flatpak-wine7_0.91_20230201.flatpak
-flatpak --user install flatpak-winezgui_0.91_20230201.flatpak
+flatpak --user install flatpak-wine8_0.92_20230202.flatpak
+flatpak --user install flatpak-proton-ge-7.36_0.92_20230202.flatpak
+flatpak --user install flatpak-wine5_0.92_20230202.flatpak
+flatpak --user install flatpak-wine7_0.92_20230202.flatpak
+flatpak --user install flatpak-winezgui_0.92_20230202.flatpak
 
 # Run
 flatpak run io.github.fastrizwaan.flatpak-wine8
@@ -60,7 +67,7 @@ https://github.com/fastrizwaan/flatpak-wine/releases
 
 #### What is flatpak wine?
 
-Flatpak-wine is simply wine and winetricks bundled in a flatpak file. 
+Flatpak-wine is simply wine and winetricks bundled in a flatpak file. winetricks can be updated from More->Update winetricks option.
 
 It includes bash scripts (WineZGUI) for GUI prompts similar to winetricks.
 
@@ -68,21 +75,14 @@ The wine prefixes or bottles, are handled with bash scripts.
 
 There are 2 wineprefixes/bottles:
 
-   default bottle (`~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/prefixes/default/`)
+   default bottle (`~/.var/app/io.github.fastrizwaan.flatpak-wine7/data//winezgui/Prefixes/`)
 
-   Game bottle    (`~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/prefixes/game/`)
+   Game bottle    (`~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/winezgui/Prefixes/GAME/`)
+   
+Handles both Installers and direct play exe files.
 
-flatpak-wine has full host access. So if you want to restrict it, use flatseal app from flathub to limit the directories it can read/write. It is given full rw access on the host so that  apps/games in different partitions or directories can be run without any issues. But everything is official, there are no patches, one can check the manifest and scripts. 
+flatpak-wine has full host access, and if you want to restrict it, use flatseal app from flathub to limit the directories it can read/write. It is given full rw access on the host so that  apps/games in different partitions or directories can be run without any issues. But everything is official, there are no patches, one can check the manifest and scripts. 
 
-### Default bottle:
-
-whatever exe we install/run using terminal `flatpak run io.github.fastrizwaan.flatpak-wine7` or (open-with from file manager)  or from menu goes to the wineprefix: `~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/prefixes/default/` directory. This can be used to test/install softwares/games. The default bottle / wine prefix gets usually gets messed up by installing many apps/games or winetricks dlls. A "Delete..." option is provided to delete `~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/prefixes/default/`. 
-
-### Game.exe / app.exe bottles:
-
-It would be good if we create and use separate bottles for each of our games/apps. And for that we can create game or app specific bottle. To do that right-click on an .exe file in the file manager (nautilus / dolphin / thunar) and choose "Create Bottle using flatpak-wine" from right-click menu of filemanager. It will ask for a name, if no name is given, "filename.exe" is used in the menu. 
-
-The game/app bottle creates a wineprefix and a launch script for that game/app at `~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/prefixes/` and creates a shortcut and icon from the exe file in the same Game/App directory which is symbolically linked (ln -s) to `~/.local/share/applications/io.github.fastrizwaan.flatpak-wine7/`. This shortcut (desktop file and icon) will be deleted when we delete the game bottle.
 
 ### Customizing Bottles:
 
