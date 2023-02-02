@@ -16,6 +16,7 @@ Official stable Wine 8.0, 7.0 and 5.0 in flatpaks for all flatpak supported dist
 Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
 Install using Software app: (install org.winehq.Wine from flathub 1st to install dependencies)
+
 [flatpak-wine 8.0 with WineZGUI](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.1/flatpak-wine8_0.92.1_20230202.flatpak) [for latest stable experience]
 
 
