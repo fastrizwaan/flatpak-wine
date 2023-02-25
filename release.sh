@@ -1,15 +1,19 @@
 # Release git
+FLATPAK_BUILD_DIR="~/.build/FLATPAK_BUILD_DIR"
 
-CURRENT_VERSION=$(grep "tag:" flatpak-wine8/io.github.fastrizwaan.flatpak-wine8.yml |cut -f2 -d ":")
+cd ${FLATPAK_BUILD_DIR}
+
+CURRENT_VERSION=$(grep "tag:" ${FLATPAK_BUILD_DIR}/flatpak-wine8/io.github.fastrizwaan.flatpak-wine8.yml |cut -f2 -d ":")
 
 DATE=$(date +'%Y%m%d')
 
-cd ~/.build/FLATPAK_BUILD_DIR
+
 #--------------------------------------------------------------------------------------------#
-rm *.flatpak
-mv $(find . -iname "*${DATE}*.flatpak") .
-sha256sum "*${DATE}*.flatpak"|tee sha256sums-${CURRENT_VERSION}_${DATE}.txt
+rm -v *.flatpak
+mv $(find ~/.build/FLATPAK_BUILD_DIR/ -ctime -1 -iname "*.flatpak") .
+sha256sum *${DATE}*.flatpak|tee sha256sums-${CURRENT_VERSION}_${DATE}.txt
 #--------------------------------------------------------------------------------------------#
 
 cd ~/.build/flatpak-wine
-#sed 's/'
+# Update version in README.md
+sed "s/${OLD_VERSION}_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/${CURRENT_VERSION}
