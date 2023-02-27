@@ -18,6 +18,7 @@ Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan
 ### Install using Software app: 
 [install org.winehq.Wine (see instruction below)](https://github.com/fastrizwaan/flatpak-wine#for-the-impatient) from flathub 1st to install dependencies then install [flatpak-wine 8.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine8_0.92.8_20230226.flatpak) [for latest stable experience] 
 
+Update (use flatpak-winezgui from flathub which includes mono); flatpak-wine5, flatpak-wine7, and flatpak-wine8 do not include mono (mscoree) to save space (`winetricks -q dotnet48`)
 
 ### For the impatient
 
@@ -28,14 +29,14 @@ In a terminal window, copy paste these:
 flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
 
-# Download flatpak-wine8
-wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine8_0.92.8_20230226.flatpak
+# Download flatpak-winezgui
+wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-winezgui_0.92.8_20230226.flatpak
 
 # Install
-flatpak --user install flatpak-wine8_0.92.8_20230226.flatpak
+flatpak --user install flatpak-winezgui_0.92.8_20230226.flatpak
 
 # Run
-flatpak run io.github.fastrizwaan.flatpak-wine8
+flatpak run io.github.fastrizwaan.WineZGUI
 ```
 #### Older versions
 
@@ -43,7 +44,7 @@ Other versions, if needed:
 [flatpak-wine 7.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine7_0.92.8_20230226.flatpak) 
 [flatpak-wine 5.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine5_0.92.8_20230226.flatpak) [for wine 5.0 compatible games]
 [flatpak-proton-ge](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-proton-ge-7.49_0.92.8_20230226.flatpak) [for proton compatible games]
-[flatpak-winezgui](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-winezgui_0.92.8_20230226.flatpak) [stable wine from flathub]
+[flatpak-wine8](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine8_0.92.8_20230226.flatpak) [wine built by yours truly]
 
 ### Get Latest releases from flatpak-wine-release (8.0, 7.0, 5.0.5) and flatpak-proton (stable from flathub)
 
@@ -58,11 +59,9 @@ It includes bash scripts (WineZGUI) for GUI prompts similar to winetricks.
 
 The wine prefixes or bottles, are handled with bash scripts.
 
-There are 2 wineprefixes/bottles:
+wineprefixes/bottles location:
 
-   default bottle (`~/.var/app/io.github.fastrizwaan.flatpak-wine7/data//winezgui/Prefixes/`)
-
-   Game bottle    (`~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/winezgui/Prefixes/GAME/`)
+   Game bottles    (`~/.var/app/io.github.fastrizwaan.WineZGUI/data/winezgui/Prefixes/`)
    
 Handles both Installers and direct play exe files.
 
