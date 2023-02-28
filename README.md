@@ -5,14 +5,16 @@
 ### Features
 
 - [x] Create Shortcut for any selected exe.
+
 - [x] Installer supported
+
 - [x] Create Game Bundles and share
+
 - [x] Save and Load Game (drive/users/$USER)
+
 - [x] Template support
   
   ### Installation:
-  
-  ### For the impatient
   
   In a terminal window, copy paste these:
   
@@ -78,10 +80,15 @@ Flatpak-wine is trying to be simple, opening an exe with flatpak-WineZGUI create
 ### Why wine inside flatpak?
 
 1. Upgrade breakage fix: When our distro updates wine, some games which work with specific version of wine will stop working. so, flatpak-wine is independent of distribution, so it will not break games with distribution upgrades of wine.
+
 2. Consistent Version  : wine within flatpak with a fixed version (5.0.x) works across all flatpak supported distributions (https://flatpak.org/setup/). And other version like flatpak-wine-6.19 can co-exist together for other games.
+
 3. Availability across most Linux distros: Centos like distributions do not provide 32 bit wine in their repository. Or you can't have older version of wine like wine-2.17 for older games.
+
 4. Consistent libraries: wine in different distro may not work because of missing libraries, e.g., debian needs to enable 32 bit support. The advantage is that the shared libraries in flatpak are consistent across all distributions.  which can be used to run official wine build from winehq.
+
 5. Works like wine bottle management apps like PlayOnLinux / Lutris for wine / Bottles app.
+
 6. Straight forward and quick launching of Windows programs and games.
    
    ### Why wine stable why not wine-staging?
