@@ -1,6 +1,6 @@
 id: io.github.fastrizwaan.WineZGUI
 branch: '22.08'
-version: '0.83'
+version: '0.92.8'
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
@@ -17,6 +17,7 @@ finish-args:
   - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
     # Need to link .desktop files
   - --filesystem=~/.local/share/applications
+  - --filesystem=~/.local/share/applications/winezgui:create
     # Most Games write to their own directories
   - --filesystem=host
     # Desktop shortcut runs wine script from host
@@ -25,7 +26,7 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --socket=wayland
-  - --socket=x11
+  - --socket=fallback-x11
   - --system-talk-name=org.freedesktop.UDisks2
   - --talk-name=org.freedesktop.Notifications
 
@@ -102,8 +103,8 @@ modules:
       - make install 
     sources:
       - type: archive
-        url: https://exiftool.org/Image-ExifTool-12.49.tar.gz
-        sha256: 976d69d9a93ea5ef4649639ab6c190f58bf265f0057ca577c41dfcaf37b1715b
+        url: https://github.com/exiftool/exiftool/archive/refs/tags/12.57.tar.gz
+        sha256: ffc55c1177e50b819072c500cbbd0fecbb1be671584a0f43217bfba597ffa933
         
   - name: desktop-file-utils
     build-options:
@@ -122,5 +123,5 @@ modules:
       - ./setup --install --flatpak --prefix=/app
     sources:
       - type: git
-        tag: 0.92.8
+        tag: 0.93.1
         url: https://github.com/fastrizwaan/WineZGUI.git

@@ -5,7 +5,8 @@
 #flatpak remove -y io.github.fastrizwaan.flatpak-wine8
 SOURCEDIR=~/.build/flatpak-wine
 OLD_VERSION=$(git tag|tail -1)
-BUILD="flatpak-winezgui flatpak-wine8 flatpak-wine7 flatpak-proton flatpak-wine5"
+#BUILD="flatpak-winezgui flatpak-wine8 flatpak-wine7 flatpak-proton flatpak-wine5"
+BUILD="flatpak-winezgui"
 REMOVE_ME=$(echo ${BUILD}|sed "s/flatpak-winezgui/WineZGUI/g")
 
 flatpak remove -y io.github.fastrizwaan.${REMOVE_ME}
@@ -21,7 +22,7 @@ FLATPAK_BUILD_DIR=~/.build/FLATPAK_BUILD_DIR
 
 cd ${FLATPAK_BUILD_DIR}
 
-CURRENT_VERSION=$(grep "tag:" ${FLATPAK_BUILD_DIR}/flatpak-wine8/io.github.fastrizwaan.flatpak-wine8.yml |cut -f2 -d ":")
+CURRENT_VERSION=$(grep "tag:" ${FLATPAK_BUILD_DIR}/flatpak-winezgui/io.github.fastrizwaan.WineZGUI.yml |cut -f2 -d ":")
 
 DATE=$(date +'%Y%m%d')
 CURRENT_VERSION_DATE=$(echo ${CURRENT_VERSION}_${DATE})
