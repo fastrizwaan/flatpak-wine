@@ -2,10 +2,6 @@
 
 ![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/winezgui-0.92.8.png)
 
-### Updated to Using freedesktop sdk 22.08
-
-Official stable Wine 8.0, 7.0 and 5.0 in flatpaks for all flatpak supported distributions (https://flatpak.org/setup/), along with WineZGUI (scripts) to manage bottles/wineprefixes. Winetricks is also included complementary :-)
-
 ### Features
 - [x] Create Shortcut for any selected exe.
 - [x] Installer supported
@@ -13,19 +9,14 @@ Official stable Wine 8.0, 7.0 and 5.0 in flatpaks for all flatpak supported dist
 - [x] Save and Load Game (drive/users/$USER)
 - [x] Template support
 
-Copyright: (C) GNU GPL3 Mohammed Asif Ali Rizvan (https://github.com/fastrizwaan)
 
-### Install using Software app: 
-[install org.winehq.Wine (see instruction below)](https://github.com/fastrizwaan/flatpak-wine#for-the-impatient) from flathub 1st to install dependencies then install [flatpak-wine 8.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine8_0.92.8_20230226.flatpak) [for latest stable experience] 
-
-Update (use flatpak-winezgui from flathub which includes mono); flatpak-wine5, flatpak-wine7, and flatpak-wine8 do not include mono (mscoree) to save space (`winetricks -q dotnet48`)
-
+### Installation:
 ### For the impatient
 
 In a terminal window, copy paste these:
 
 ```
-# Install flathub repo and dependencies for flatpak-wine
+# Install flathub repo and dependencies for flatpak-WineZGUI
 flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
 
@@ -38,35 +29,32 @@ flatpak --user install flatpak-winezgui_0.92.8_20230226.flatpak
 # Run
 flatpak run io.github.fastrizwaan.WineZGUI
 ```
-#### Older versions
 
-Other versions, if needed:
-[flatpak-wine 7.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine7_0.92.8_20230226.flatpak) 
-[flatpak-wine 5.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine5_0.92.8_20230226.flatpak) [for wine 5.0 compatible games]
-[flatpak-proton-ge](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-proton-ge-7.49_0.92.8_20230226.flatpak) [for proton compatible games]
-[flatpak-wine8](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine8_0.92.8_20230226.flatpak) [wine built by yours truly]
+Other versions, if required:
+[flatpak-wine 7.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine7_0.92.8_20230226.flatpak), [flatpak-wine 5.0](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine5_0.92.8_20230226.flatpak), [flatpak-proton-ge 7.49](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-proton-ge-7.49_0.92.8_20230226.flatpak), [flatpak-wine8](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.92.8/flatpak-wine8_0.92.8_20230226.flatpak)
 
-### Get Latest releases from flatpak-wine-release (8.0, 7.0, 5.0.5) and flatpak-proton (stable from flathub)
-
-https://github.com/fastrizwaan/flatpak-wine/releases
+### Updates
+Get latest updated flatpaks from https://github.com/fastrizwaan/flatpak-wine/releases
 
 
-#### What is flatpak wine?
+#### What is flatpak-wine and flatpak-WineZGUI?
 
-Flatpak-wine is simply wine and winetricks bundled in a flatpak file. winetricks can be updated from More->Update winetricks option.
+Flatpak-wine is simply wine and winetricks bundled in a flatpak file. Here wine is built and included in the flatpak.
+Flatpak-WineZGUI is flathub's wine (org.winehq.Wine) + WineZGUI scripts. Here wine is not built/bundled for the flatpak.
 
-It includes bash scripts (WineZGUI) for GUI prompts similar to winetricks.
-
-The wine prefixes or bottles, are handled with bash scripts.
-
-wineprefixes/bottles location:
-
-   Game bottles    (`~/.var/app/io.github.fastrizwaan.WineZGUI/data/winezgui/Prefixes/`)
+#### Where are the game prefixes?
+Wine by default uses ~/.wine as prefix. But WineZGUI uses different prefix location
+Game bottles/Prefixes:    `~/.var/app/io.github.fastrizwaan.WineZGUI/data/winezgui/Prefixes/`
    
-Handles both Installers and direct play exe files.
+#### Can it handle installers and directplay exe files?
 
-flatpak-wine has full host access, and if you want to restrict it, use flatseal app from flathub to limit the directories it can read/write. It is given full rw access on the host so that  apps/games in different partitions or directories can be run without any issues. But everything is official, there are no patches, one can check the manifest and scripts. 
+Yes, what works with standard wine should work. If an exe won't work test it with `flatpak run --command=wine io.github.fastrizwaan.WineZGUI <GAME>.exe` which will use `~/.wine` as prefix.
 
+#### How are installers handled by WineZGUI?
+Prefix and Launch Script for both Installers and direct play exe files are created. Once the installer is launched, it creates new launch scripts for the found installed exe in the installer's prefix.
+
+#### Is it safe?
+flatpak-wine and flatpak-WineZGUI have full host/filesystem access, and if you want to restrict it, use flatseal app from flathub to limit the directories it can read/write. It is given full rw access on the host so that  apps/games in different partitions or directories can be run without any issues. But everything is official, there are no patches, one can check the manifest and scripts. 
 
 ### Customizing Bottles:
 
@@ -82,12 +70,13 @@ We  can use Open Terminal feature to access command line.
 
 ##### How to access this app/wine bottle
 
-Just go to `~/.var/app/io.github.fastrizwaan.flatpak-wine7/data/prefixes/`, and we can find all the games and default prefixes created by flatpak-wine7 here.
+Just go to `~/.var/app/io.github.fastrizwaan.WineZGUI/data/prefixes/`, and we can find all the games and default prefixes created by flatpak-WineZGUI here.
 
 ### Why flatpak-wine when others (lutris, playonlinux, bottles, etc.) exist?
 
-Lutris, Bottles, Phoenicis, PlayOnLinux, either does not work consistently and or have confusing frontend / interface. 
-Flatpak-wine is trying to be simple, and work as expected i.e., running exe from filemanager, and creating bottles from exe is easier in flatpak-wine.
+Lutris, Bottles, Phoenicis, PlayOnLinux, q4wine, WineGUI, etc. have confusing frontend / interface. They are prefix oriented, that is the user is asked to create a prefix then choose a setup/exe file to work with that prefix.
+
+Flatpak-wine is trying to be simple, opening an exe with flatpak-WineZGUI creates a prefix automatically for any installer/exe to isolate it, which is way faster. Though every new prefix takes around a couple hundred megabytes disk space.
 
 ### Why wine inside flatpak?
 
@@ -98,7 +87,7 @@ Flatpak-wine is trying to be simple, and work as expected i.e., running exe from
 5. Works like wine bottle management apps like PlayOnLinux / Lutris for wine / Bottles app.
 6. Straight forward and quick launching of Windows programs and games.
 
-### Why wine-7.0 or wine-5.0 stable why not wine-staging?
+### Why wine stable why not wine-staging?
 
 Wine staging breaks with updates. So it is better to use stable wine than latest but unreliable wine version. 
 
