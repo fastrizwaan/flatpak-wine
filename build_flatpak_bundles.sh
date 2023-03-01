@@ -6,7 +6,8 @@
 SOURCEDIR=~/.build/flatpak-wine
 OLD_VERSION=$(git tag|tail -1)
 #BUILD="flatpak-winezgui flatpak-wine8 flatpak-wine7 flatpak-proton flatpak-wine5"
-BUILD="flatpak-winezgui"
+BUILD="flatpak-winezgui flatpak-wine8"
+#BUILD="flatpak-winezgui"
 REMOVE_ME=$(echo ${BUILD}|sed "s/flatpak-winezgui/WineZGUI/g")
 
 flatpak remove -y io.github.fastrizwaan.${REMOVE_ME}
