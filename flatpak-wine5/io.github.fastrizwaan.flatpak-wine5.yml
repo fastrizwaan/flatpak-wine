@@ -412,8 +412,8 @@ modules:
       - make install 
     sources:
       - type: archive
-        url: https://exiftool.org/Image-ExifTool-12.49.tar.gz
-        sha256: 976d69d9a93ea5ef4649639ab6c190f58bf265f0057ca577c41dfcaf37b1715b
+        url: https://github.com/exiftool/exiftool/archive/refs/tags/12.57.tar.gz
+        sha256: ffc55c1177e50b819072c500cbbd0fecbb1be671584a0f43217bfba597ffa933
         
   - name: desktop-file-utils
     build-options:
