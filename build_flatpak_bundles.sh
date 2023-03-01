@@ -43,6 +43,7 @@ sha256sum *.flatpak|tee sha256sums-${CURRENT_VERSION_DATE}.txt
 
 cd ~/.build/flatpak-wine
 # Update version in README.md
+CURRENT_VERSION=$(echo ${CURRENT_VERSION}); # remove space
 sed "s/${OLD_VERSION}_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/${CURRENT_VERSION}_${DATE}/g" -i README.md
 sed "s/${OLD_VERSION}/${CURRENT_VERSION}/g" -i README.md
 
