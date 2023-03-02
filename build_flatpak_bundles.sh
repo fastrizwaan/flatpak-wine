@@ -25,6 +25,7 @@ cd ${FLATPAK_BUILD_DIR}
 
 CURRENT_VERSION=$(grep "tag:" ${FLATPAK_BUILD_DIR}/flatpak-winezgui/io.github.fastrizwaan.WineZGUI.yml |cut -f2 -d ":")
 
+CURRENT_VERSION=$(echo ${CURRENT_VERSION}); # remove space
 DATE=$(date +'%Y%m%d')
 CURRENT_VERSION_DATE=$(echo ${CURRENT_VERSION}_${DATE})
 echo "SOURCEDIR=$SOURCEDIR"
@@ -43,7 +44,6 @@ sha256sum *.flatpak|tee sha256sums-${CURRENT_VERSION_DATE}.txt
 
 cd ~/.build/flatpak-wine
 # Update version in README.md
-CURRENT_VERSION=$(echo ${CURRENT_VERSION}); # remove space
 sed "s/${OLD_VERSION}_[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]/${CURRENT_VERSION}_${DATE}/g" -i README.md
 sed "s/${OLD_VERSION}/${CURRENT_VERSION}/g" -i README.md
 

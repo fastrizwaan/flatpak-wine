@@ -19,7 +19,7 @@ finish-args:
   - --filesystem=~/.local/share/applications
   - --filesystem=~/.local/share/applications/winezgui:create
     # Most Games write to their own directories
-  - --filesystem=host
+  - --env=PATH=/app/lib/webview/bin:/app/bin:/usr/bin
     # Desktop shortcut runs wine script from host
   - --talk-name=org.freedesktop.Flatpak
   - --share=ipc
@@ -29,7 +29,7 @@ finish-args:
   - --socket=fallback-x11
   - --system-talk-name=org.freedesktop.UDisks2
   - --talk-name=org.freedesktop.Notifications
-
+  - --filesystem=host
 cleanup:
   - '*.a'
   - '*.la'
@@ -123,5 +123,5 @@ modules:
       - ./setup --install --flatpak --prefix=/app
     sources:
       - type: git
-        tag: 0.93.4
+        tag: 0.93.6
         url: https://github.com/fastrizwaan/WineZGUI.git

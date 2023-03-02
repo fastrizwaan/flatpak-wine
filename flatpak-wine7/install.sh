@@ -34,7 +34,7 @@ APP_ID="io.github.fastrizwaan.flatpak-wine7"
 SHORT_APP_ID="flatpak-wine7"
 DATE=$(date +'%Y%m%d')
 
-WINEZGUI_VERSION=0.93.4
+WINEZGUI_VERSION=0.93.6
 BRANCH=22.08
 
 # handle relative path for building
