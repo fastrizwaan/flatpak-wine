@@ -19,7 +19,7 @@ finish-args:
   - --filesystem=~/.local/share/applications
   - --filesystem=~/.local/share/applications/winezgui:create
     # Most Games write to their own directories
-  - --env=PATH=/app/lib/webview/bin:/app/bin:/usr/bin
+  - --env=PATH=/app/bin:/usr/bin
     # Desktop shortcut runs wine script from host
   - --talk-name=org.freedesktop.Flatpak
   - --share=ipc
@@ -58,6 +58,23 @@ add-extensions:
 
 modules:
  
+  # Create 32-bit directories
+  - name: compat
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu/GL
+      - mkdir -p /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/dri/intel-vaapi-driver
+      - mkdir -p /app/lib/i386-linux-gnu/dri/intel-vaapi-driver
+      - mkdir -p /app/lib/udev/rules.d
+      - mkdir -p /app/extensions/Plugins
+      - mkdir -p /app/lib64
+      - mkdir -p /app/lib32
+      - mkdir -p /app/lib/ffmpeg
+      - mkdir -p /app/lib32/ffmpeg
+      - mkdir -p /app/utils
+
   - name: icoutils
     build-options:
       make-args: -j $FLATPAK_BUILDER_N_JOBS
@@ -123,5 +140,5 @@ modules:
       - ./setup --install --flatpak --prefix=/app
     sources:
       - type: git
-        tag: 0.93.8
+        tag: 0.93.10
         url: https://github.com/fastrizwaan/WineZGUI.git

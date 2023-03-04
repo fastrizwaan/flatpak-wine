@@ -104,6 +104,7 @@ modules:
       - mkdir -p /app/lib32
       - mkdir -p /app/lib/ffmpeg
       - mkdir -p /app/lib32/ffmpeg
+      - mkdir -p /app/utils
       
 # libusb
   - name: libusb-64bit
@@ -448,7 +449,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.93.8
+        tag: 0.93.10
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
