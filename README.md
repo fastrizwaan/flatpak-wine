@@ -1,6 +1,4 @@
-# Flatpak-Wine (wine-8.0) (wine-7.0) and (wine-5.0.5) and Flatpak-Proton GE 7.49 Stable
-
-![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.94.9/winezgui-0.94.9.png)
+# Flatpak-Wine (wine-8.0) and Flatpak-WineZGUI (wine-8.0)
 
 ### Features
 
@@ -22,20 +20,19 @@
   # Install flathub repo and dependencies for flatpak-WineZGUI
   flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
+  
   # Download flatpak-winezgui
   wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.94.9/flatpak-winezgui_0.94.9_20230306.flatpak
-  wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.94.9/flatpak-wine8_0.94.9_20230306.flatpak
+  
   # Install
   flatpak --user install flatpak-winezgui_0.94.9_20230306.flatpak
-  flatpak --user install flatpak-wine8_0.94.9_20230306.flatpak
+  
   # Run
-  flatpak run io.github.fastrizwaan.WineZGUI
-  flatpak run io.github.fastrizwaan.flatpak-wine8
+  flatpak run io.github.fastrizwaan.WineZGUI### Updates
+  
   ```
   
-  ### Updates
-  
-  Get latest updated flatpaks from https://github.com/fastrizwaan/flatpak-wine/releases
+  Get flatpak-wine8 flatpak from https://github.com/fastrizwaan/flatpak-wine/releases
   
   #### What is flatpak-wine and flatpak-WineZGUI?
   
@@ -107,13 +104,13 @@ Flatpak-wine is trying to be simple, opening an exe with flatpak-WineZGUI create
    ### Usage (commandline):
    
    ```
-   flatpak run --command=wine io.github.fastrizwaan.flatpak-wine7 --version
-   wine-7.0
+   flatpak run --command=wine io.github.fastrizwaan.WineZGUI --version
+   wine-8.0
    ```
    
    ### How to kill/stop stuck flatpak-wine game or application?
    
-   from the terminal window run `flatpak kill io.github.fastrizwaan.flatpak-wine7` or from your desktop environment's menu `winezgui->Kill...`
+   from the terminal window run `flatpak kill io.github.fastrizwaan.WineZGUI` or from your desktop environment's menu `winezgui->Kill...`
    
    ### How to build the same flatpak on my system?
    
@@ -121,7 +118,7 @@ Flatpak-wine is trying to be simple, opening an exe with flatpak-WineZGUI create
    
    ```
    git clone https://github.com/fastrizwaan/flatpak-wine.git
-   cd flatpak-wine/flatpak-wine7
+   cd flatpak-wine/flatpak-winezgui
    bash ./install.sh
    ```
    
