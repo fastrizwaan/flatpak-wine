@@ -79,7 +79,7 @@ finish-args:
   - --talk-name=org.gnome.Mutter.DisplayConfig
   - --talk-name=org.freedesktop.Flatpak
   - --filesystem=host
-#  - --filesystem=~/.local/share/flatpak-wine80/:create
+  - --filesystem=~/.local/share/applications:create
   - --device=all
   # wineprefixes are created here
 #  - --persist=~/.local/share/flatpak-wine80/
@@ -449,7 +449,7 @@ modules:
         /app/share/applications/io.github.fastrizwaan.WineZGUI.desktop
     sources:
       - type: git
-        tag: 0.94.5
+        tag: 0.94.8
         url: https://github.com/fastrizwaan/WineZGUI.git
 
 cleanup:
