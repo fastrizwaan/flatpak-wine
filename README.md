@@ -1,5 +1,7 @@
 # Flatpak-Wine (wine-8.0) and Flatpak-WineZGUI (wine-8.0)
 
+![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.94.9/winezgui-0.94.9.png)
+
 ### Features
 
 - [x] Create Shortcut for any selected exe.
