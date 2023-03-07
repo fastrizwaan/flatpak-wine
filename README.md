@@ -20,17 +20,19 @@
   
   ```
   # Install flathub repo and dependencies for flatpak-WineZGUI
-  flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  flatpak --user remote-add --if-not-exists \
+flathub https://flathub.org/repo/flathub.flatpakrepo
   flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
   
   # Download flatpak-winezgui
-  wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.94.9/flatpak-winezgui_0.94.9_20230307.flatpak
+  wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download\
+/0.94.9/flatpak-winezgui_0.94.9_20230307.flatpak
   
   # Install
   flatpak --user install flatpak-winezgui_0.94.9_20230307.flatpak
   
   # Run
-  flatpak run io.github.fastrizwaan.WineZGUI### Updates
+  flatpak run io.github.fastrizwaan.WineZGUI
   
   ```
   
