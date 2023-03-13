@@ -1,6 +1,6 @@
 # Flatpak-Wine (wine-8.0) and Flatpak-WineZGUI (wine-8.0)
 
-![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.95.3/winezgui-0.95.3.png)
+![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.95.4/winezgui-0.95.4.png)
 
 ### Features
 
@@ -21,8 +21,8 @@
   ```
   flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
   flatpak --user -y install flathub org.winehq.Wine/x86_64/stable-22.08
-  wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.95.3/flatpak-winezgui_0.95.3_20230312.flatpak
-  flatpak --user install flatpak-winezgui_0.95.3_20230312.flatpak
+  wget -c https://github.com/fastrizwaan/flatpak-wine/releases/download/0.95.4/flatpak-winezgui_0.95.4_20230314.flatpak
+  flatpak --user install flatpak-winezgui_0.95.4_20230314.flatpak
   flatpak -y remove io.github.fastrizwaan.WineZGUI
   
   ```
