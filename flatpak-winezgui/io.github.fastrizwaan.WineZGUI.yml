@@ -140,5 +140,5 @@ modules:
       - ./setup --install --flatpak --prefix=/app
     sources:
       - type: git
-        tag: 0.95.7
+        tag: 0.95.8
         url: https://github.com/fastrizwaan/WineZGUI.git
