@@ -16,7 +16,7 @@ APP_ID="io.github.fastrizwaan.flatpak-proton"
 SHORT_APP_ID="flatpak-proton-ge"
 DATE=$(date +'%Y%m%d')
 
-WINEZGUI_VERSION=0.95.9
+WINEZGUI_VERSION=0.96.0
 
 if [ "${1}" = "sdk" ] ; then
      sudo flatpak --system remote-add --if-not-exists \
