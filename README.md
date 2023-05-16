@@ -1,6 +1,6 @@
 # Flatpak-Wine (wine-8.0) and Flatpak-WineZGUI (wine-8.0)
 
-![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.96.2/winezgui-0.96.2.png)
+![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.96.1/winezgui-0.96.1.png)
 
 ### Features
 
