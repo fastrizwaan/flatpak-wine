@@ -1,6 +1,6 @@
 id: io.github.fastrizwaan.WineZGUI
 branch: '22.08'
-version: '0.96.1'
+version: '0.96.3'
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
@@ -21,6 +21,7 @@ finish-args:
   - --env=PATH=/app/bin:/usr/bin
     # Desktop shortcut runs wine script from host
   #- --talk-name=org.freedesktop.Flatpak
+  - --talk-name=org.freedesktop.Flatpak
   - --share=ipc
   - --share=network
   - --socket=pulseaudio
@@ -28,8 +29,8 @@ finish-args:
   - --socket=x11
   - --system-talk-name=org.freedesktop.UDisks2
   - --talk-name=org.freedesktop.Notifications
-  - --filesystem=host:ro
-
+  #- --filesystem=host:ro
+  - --filesystem=host:rw
 cleanup:
   - '*.a'
   - '*.la'
