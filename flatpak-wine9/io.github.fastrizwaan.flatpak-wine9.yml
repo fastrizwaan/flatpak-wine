@@ -118,12 +118,11 @@ modules:
       make-args: -j $FLATPAK_BUILDER_N_JOBS
       prefix: /app
       prepend-path: /app/bin
-      ldflags: -L/app/lib64 -L/app/lib -L/app/lib32
+      ldflags: -L/app/lib64 -L/app/lib
       append-path: /usr/lib/sdk/toolchain-i386/bin
       env:
         CC:  i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib32
       strip: true
       no-debuginfo: true
       
@@ -157,7 +156,7 @@ modules:
     sources:
       - type: archive
         url: https://dl.winehq.org/wine/source/9.0/wine-9.0-rc3.tar.xz
-        sha256: 22035f3836b4f9c3b1940ad90f9b9e3c1be09234236d2a80d893180535c75b7d
+        sha256: 729801f1c933baa63cdce60b7758b6e2ea1f2ef46a160bb57475c5917a068921
         
   - name: winetricks
     buildsystem: simple
