@@ -1,8 +1,14 @@
 # Flatpak-Wine (wine-8.0) and Flatpak-WineZGUI (wine-8.0)
 <a href="https://flathub.org/apps/details/io.github.fastrizwaan.WineZGUI"><img width='240' alt='Download on Flathub' src='https://dl.flathub.org/assets/badges/flathub-badge-en.png'/></a>
+Insteall WineZGUI from flathub and run
+```
+flatpak override --user --talk-name=org.freedesktop.Flatpak --filesystem=host io.github.fastrizwaan.WineZGUI
+```
+To get the same feature as of flatpak-wine.
+
 
 ![](https://github.com/fastrizwaan/flatpak-wine/releases/download/0.96.1/winezgui-0.96.1.png)
-
+flatpak override --user --talk-name=org.freedesktop.Flatpak --filesystem=host io.github.fastrizwaan.WineZGUI
 ### Features
 
 - [x] Create Shortcut for any selected exe.
