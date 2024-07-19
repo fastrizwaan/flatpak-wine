@@ -1,10 +1,10 @@
 app-id: io.github.fastrizwaan.flatpak-wine8
-base-version: '22.08'
+base-version: '23.08'
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: winezgui
-branch: '22.08'
+branch: '23.08'
 separate-locales: false
 
 command: winezgui
@@ -15,16 +15,16 @@ rename-desktop-file: io.github.fastrizwaan.WineZGUI.desktop
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '22.08'
+    version: '23.08'
 
   org.gnome.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '22.08'
+    version: '23.08'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    versions: "22.08;1.4"
+    versions: "23.08;1.4"
     version: '1.4'
     subdirectories: true
     no-autodownload: true
@@ -40,7 +40,7 @@ add-extensions:
       no-autodownload: true
       download-if: active-gl-driver
       enable-if: active-gl-driver
-      version: '22.08'
+      version: '23.08'
   
   org.freedesktop.Platform.VAAPI.Intel.i386:
       directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
@@ -49,18 +49,18 @@ add-extensions:
       add-ld-path: lib
       download-if: active-gl-driver
       enable-if: active-gl-driver
-      version: '22.08'
+      version: '23.08'
   
   org.freedesktop.Platform.ffmpeg-full:
       directory: lib/ffmpeg
       add-ld-path: .
-      version: '22.08'
+      version: '23.08'
       autodelete: false
 
   org.freedesktop.Platform.ffmpeg_full.i386:
       directory: lib32/ffmpeg
       add-ld-path: .
-      version: '22.08'
+      version: '23.08'
       autodelete: false
       
 # Support 32-bit at buildtime
